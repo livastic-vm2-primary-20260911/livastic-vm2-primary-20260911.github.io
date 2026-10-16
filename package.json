@@ -1,0 +1,13 @@
+{
+  "name": "workflow-guard-homepage",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "AI-disclosed bilingual GitHub Actions and Python developer service home",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
