@@ -1,0 +1,56 @@
+{
+  "x402Version": 2,
+  "name": "VM5 Original API Tools - x402 Base USDC",
+  "description": "Existing independent paid developer and data preflight APIs. Listing managed by same-owner VM2 distribution site; original merchant and settlement endpoint remain VM5. Each payment is per successful response, not a subscription.",
+  "merchant": "https://vm5-openapi-x402.onrender.com",
+  "source": "https://github.com/livastic-vm5-primary-20260911/x402-openapi-lint",
+  "openapi": "https://vm5-openapi-x402.onrender.com/openapi.json",
+  "note": "A listing or HTTP 402 is not a sale. Two previously settled calls (OpenAPI template 0.010 USDC and CSV report 0.005 USDC) came from one independent automated buyer; no recurring demand is claimed.",
+  "resources": [
+    {
+      "url": "https://vm5-openapi-x402.onrender.com/v1/x402-template",
+      "method": "GET",
+      "description": "Download an original x402 v2 OpenAPI example with a reproducible Redocly lint result; reference template, not a production security audit.",
+      "accepts": [
+        {
+          "scheme": "exact",
+          "network": "eip155:8453",
+          "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+          "amount": "10000",
+          "payTo": "0x6b01efA0705E91a7aca54271510bf9e594717f34",
+          "maxTimeoutSeconds": 300
+        }
+      ]
+    },
+    {
+      "url": "https://vm5-openapi-x402.onrender.com/v1/csv-report",
+      "method": "GET",
+      "description": "Get a reproducible demonstration CSV quality report (duplicate rows, invalid fields, CSV formula-injection warnings). Sample data, not customer data.",
+      "accepts": [
+        {
+          "scheme": "exact",
+          "network": "eip155:8453",
+          "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+          "amount": "5000",
+          "payTo": "0x6b01efA0705E91a7aca54271510bf9e594717f34",
+          "maxTimeoutSeconds": 300
+        }
+      ]
+    },
+    {
+      "url": "https://vm5-openapi-x402.onrender.com/v1/email-dns-preflight?domain=gmail.com",
+      "method": "GET",
+      "description": "Get a bounded public DNS report for MX, SPF, DMARC and A records for a chosen domain. Not mailbox or email deliverability verification.",
+      "accepts": [
+        {
+          "scheme": "exact",
+          "network": "eip155:8453",
+          "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+          "amount": "5000",
+          "payTo": "0x6b01efA0705E91a7aca54271510bf9e594717f34",
+          "maxTimeoutSeconds": 300
+        }
+      ]
+    }
+  ]
+}
