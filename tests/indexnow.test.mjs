@@ -5,11 +5,11 @@ import os from "node:os";
 import path from "node:path";
 import {makePayload,SITE,ENDPOINT} from "../tools/indexnow.mjs";
 
-test("The root-level IndexNow key scopes exactly the original two canonical pages",()=>{
+test("The root-level IndexNow key scopes four original canonical business and guide pages",()=>{
  const p=makePayload();
  assert.equal(p.host,"livastic-vm2-primary-20260911.github.io");
- assert.equal(p.urlList.length,2);
- assert.deepEqual(p.urlList,[SITE,SITE+"ko/"]);
+ assert.equal(p.urlList.length,4);
+ assert.deepEqual(p.urlList,[SITE,SITE+"ko/",SITE+"guides/pull-request-target-november-2026/",SITE+"ko/guides/pull-request-target-2026/"]);
  assert.match(p.keyLocation,/\.github\.io\/[a-f0-9]{32}\.txt$/);
  assert.equal(ENDPOINT,"https://api.indexnow.org/indexnow");
 });

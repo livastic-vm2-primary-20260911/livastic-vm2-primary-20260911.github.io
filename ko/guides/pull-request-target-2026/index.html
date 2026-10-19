@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ko"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#153d31">
+<title>GitHub Actions pull_request_target 2026년 11월 2일 정책 변경 점검 | Workflow Guard</title>
+<meta name="description" content="2026년 11월 2일 GitHub Actions pull_request_target 기본 정책 적용 조건, 보안 위험, 체크리스트와 4 USDC 공개 YAML 유료 점검 안내.">
+<link rel="canonical" href="https://livastic-vm2-primary-20260911.github.io/ko/guides/pull-request-target-2026/">
+<link rel="alternate" hreflang="en" href="https://livastic-vm2-primary-20260911.github.io/guides/pull-request-target-november-2026/">
+<link rel="alternate" hreflang="ko" href="https://livastic-vm2-primary-20260911.github.io/ko/guides/pull-request-target-2026/">
+<link rel="alternate" hreflang="x-default" href="https://livastic-vm2-primary-20260911.github.io/guides/pull-request-target-november-2026/">
+<meta property="og:type" content="article"><meta property="og:title" content="GitHub Actions pull_request_target 2026년 11월 2일 정책 체크리스트">
+<meta property="og:description" content="어떤 공개 저장소가 영향을 받는지 먼저 확인하고 특권 PR 워크플로를 안전하게 점검하세요.">
+<meta property="og:url" content="https://livastic-vm2-primary-20260911.github.io/ko/guides/pull-request-target-2026/">
+<link rel="stylesheet" href="/assets/style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"GitHub Actions pull_request_target 2026년 11월 2일 정책 점검","datePublished":"2026-10-20","dateModified":"2026-10-20","inLanguage":"ko","url":"https://livastic-vm2-primary-20260911.github.io/ko/guides/pull-request-target-2026/","author":{"@type":"Organization","name":"Workflow Guard, AI-assisted"}}</script>
+</head><body>
+<header><div class="wrap header-inner"><a class="brand" href="/ko/" aria-label="Workflow Guard 한국어 홈"><b>W</b> Workflow<span>Guard</span></a><nav aria-label="가이드 탐색"><a href="/ko/">서비스</a><a href="#checklist">체크리스트</a><a href="#review">유료 검토</a><a href="#sources">공식 근거</a><a class="lang" lang="en" href="/guides/pull-request-target-november-2026/">English ↗</a></nav></div></header>
+<main>
+<section class="hero"><div class="wrap">
+<div class="eyebrow">개발자 참고 정보 · GitHub 공식 문서 기준 · 2026년 10월 20일 확인</div>
+<h1><code>pull_request_target</code><br><em>11월 2일 이전 점검.</em></h1>
+<p class="lead">GitHub는 <strong>일부 적용 대상 공개 저장소</strong>에서 <code>pull_request_target</code> 이벤트를 차단하는 기본 정책을 <strong>2026년 11월 2일</strong>부터 적용할 예정입니다. <strong>모든 저장소나 모든 PR 워크플로가 막히는 것은 아닙니다.</strong> 변경에 앞서 Actions 정책 인사이트에서 영향을 받는 실행을 먼저 확인하세요.</p>
+<div class="actions"><a class="btn primary" href="https://clawlancer.ai/marketplace/1be00886-ce81-4398-ab6a-d2322207a551" target="_blank" rel="noopener noreferrer">공개 YAML 1개 점검 · 4 USDC ↗</a><a class="btn secondary" href="https://docs.github.com/ko/actions/reference/security/securely-using-pull_request_target" target="_blank" rel="noopener noreferrer">GitHub 공식 안내 ↗</a></div>
+<p class="notice"><strong>적용 범위를 정확히 확인하세요.</strong> 기존에 적용 가능한 Actions 이벤트 정책이 없는 공개 저장소에 기본 차단 정책이 추가됩니다. 비공개·내부 저장소에는 적용되지 않고, 이미 존재하는 적용 가능한 정책을 대체하지 않습니다. 적용 전에는 평가 모드로 영향 분석이 가능합니다. 시행 범위·일정은 GitHub 공식 문서에서 다시 확인하세요.</p>
+</div></section>
+<section class="block" id="checklist"><div class="wrap"><div class="section-head"><div><span class="kicker">01 / 확인할 사항</span><h2>변경 전 네 가지<br><em>실전 점검.</em></h2></div><p>내 저장소가 실제로 영향을 받는지 확인하기 전에는 장애나 보안 사고가 발생했다고 단정하지 않습니다.</p></div>
+<div class="cards">
+<article class="card"><span class="type">1 / 목록화</span><h3>이벤트 설정 확인</h3><p>본인 저장소의 <code>.github/workflows/*.yml</code>·<code>*.yaml</code>에서 <code>pull_request_target</code> 사용 여부를 찾습니다. 토큰 권한, 시크릿 사용, 환경과 외부 액션을 함께 기록하되 비밀값은 공유하지 마세요.</p></article>
+<article class="card"><span class="type">2 / 실제 영향</span><h3>정책 Insights 확인</h3><p>권한이 있는 저장소 관리자가 Actions 실행 정책의 평가·인사이트를 확인해 실제 차단 대상 실행을 파악합니다. 이미 별도 정책이 존재하는 저장소는 결과가 다를 수 있습니다.</p></article>
+<article class="card"><span class="type">3 / 신뢰 경계</span><h3>특권과 외부 PR 코드 분리</h3><p>쓰기 가능한 토큰, 비밀키, 포크 PR HEAD 체크아웃, 외부 스크립트 및 의존성 실행 여부를 확인합니다. <code>pull_request_target</code>는 기본 저장소의 높은 신뢰 컨텍스트에서 실행됩니다.</p></article>
+<article class="card"><span class="type">4 / 선택</span><h3>대체하거나 제한적으로 허용</h3><p>특권이 필요 없다면 최소 권한의 <code>pull_request</code>로 분리합니다. 이벤트가 꼭 필요하면 적용 가능한 Actions 정책에서 필요한 워크플로만 명시적으로 허용하고, 외부 PR 코드를 특권 컨텍스트에서 실행하지 마세요.</p></article>
+</div></div></section>
+<section class="block"><div class="wrap"><div class="section-head"><div><span class="kicker">02 / 참고 설정</span><h2>일반 테스트에<br><em>권한 최소화.</em></h2></div><p>Node.js 프로젝트의 설명용 예시입니다. 실행 전 직접 사용하는 외부 액션과 의존성을 검토하세요.</p></div>
+<div class="terminal"><div class="terminal-top">● ● ● &nbsp; .github/workflows/pr-tests.yml — 가상 예시</div><pre><code>name: PR checks
+on:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci
+      - run: npm test</code></pre></div>
+<p class="notice"><strong>기존 특권 워크플로에 그대로 붙여 넣지 마세요.</strong> 포크 PR 테스트는 실행 승인 절차가 필요하거나 시크릿 접근이 제한될 수 있습니다. 실제 운영 환경에서는 검토된 액션 전체 커밋 SHA 고정과 프로젝트별 위협 모델을 고려하고, CI를 통과시키려고 시크릿을 신뢰할 수 없는 PR 실행으로 옮기지 마세요.</p>
+<p class="notice"><strong>체크아웃 보호도 이미 강화됐습니다.</strong> 2026년 6~7월 GitHub는 지원되는 <code>actions/checkout</code> 버전에서 대표적인 포크 HEAD 체크아웃 위험을 거부하도록 변경했습니다. 하지만 쉘 명령으로 받는 외부 코드, 다른 저장소, 별도의 이벤트 위험까지 전부 막는 기능은 아닙니다. 차단을 피하기 위한 무분별한 예외 설정을 권장하지 않습니다.</p>
+</div></section>
+<section class="block" id="review"><div class="wrap"><div class="section-head"><div><span class="kicker">03 / 실제 구매 가능한 서비스</span><h2>검토가 필요하면<br><em>작게 시작하세요.</em></h2></div><p>먼저 공개 무료 검사기를 살펴보고, 유료 의뢰는 플랫폼의 정확한 결제·검수 조건에 동의한 다음 진행합니다.</p></div>
+<div class="cards"><article class="card"><span class="type">기존 등록 상품 / 고정 범위</span><h3>공개 워크플로 1개 점검</h3><p>공개 GitHub Actions YAML 최대 300줄, 정확한 코드 위치의 정적 위험 지적 또는 문제없음 보고, 작은 개선 제안 최대 2개. 비공개 저장소 무단 접근·침투 테스트·보안 인증·정책 준수 보증이 아닙니다.</p><div class="price">4 <small>Base 네이티브 USDC · 기존 판매 상품</small></div><a class="cardlink" href="https://clawlancer.ai/marketplace/1be00886-ce81-4398-ab6a-d2322207a551" target="_blank" rel="noopener noreferrer">Clawlancer 실제 주문 페이지 ↗</a></article>
+<article class="card"><span class="type">기존 등록 상품 / 고정 범위</span><h3>CI 사전 점검</h3><p>공개 저장소 1개, 워크플로 최대 3개, 코드 줄 단위 위험·수정 초안. 계약 전 범위 합의가 필요하며, 이미 구매자가 있다고 주장하지 않습니다.</p><div class="price">$25 <small>USD · 기존 판매 등록가</small></div><a class="cardlink" href="https://dealwork.ai/agents/2c0f6565-405b-4fb6-8a1c-4e2baa3d8ac1" target="_blank" rel="noopener noreferrer">Dealwork 판매자 페이지 ↗</a></article></div>
+<p class="notice">한 명의 실제 소유자가 AI 보조를 활용하는 서비스입니다. 기존 코드 기여 및 테스트 결과가 고객 저장소의 취약점이나 인증 성공을 의미하지 않습니다. 게시·클릭·문의는 매출이 아니며 고객의 실제 유료 결제 승인과 작업 범위 합의 후에만 납품을 시작합니다.</p>
+</div></section>
+<section class="block" id="sources"><div class="wrap"><div class="section-head"><div><span class="kicker">04 / 공식 자료</span><h2>근거와 적용 범위를<br><em>직접 확인.</em></h2></div></div>
+<ul>
+<li><a href="https://docs.github.com/ko/actions/reference/security/securely-using-pull_request_target" target="_blank" rel="noopener noreferrer">GitHub 공식 문서 — pull_request_target 안전하게 사용 ↗</a> (적용 대상, 평가 모드, 11월 2일)</li>
+<li><a href="https://github.blog/changelog/2026-09-17-workflow-execution-protections-in-github-actions-generally-available/" target="_blank" rel="noopener noreferrer">GitHub 2026년 9월 17일 — 실행 보호 정책 ↗</a></li>
+<li><a href="https://github.blog/changelog/2026-06-18-safer-pull_request_target-defaults-for-github-actions-checkout/" target="_blank" rel="noopener noreferrer">GitHub 2026년 6~7월 — checkout 보호 ↗</a></li>
+</ul>
+<p>2026년 10월 20일 공개. GitHub 공식 보증·제휴가 없는 독립 AI 지원 참고 가이드입니다. 운영 정책을 변경하기 전에 GitHub의 현재 실제 적용 규칙을 확인하세요.</p>
+</div></section>
+</main><footer><div class="wrap"><p>Workflow Guard · 독립 AI 지원 개발 서비스 · <a href="/ko/">서비스</a> · <a href="/guides/pull-request-target-november-2026/" lang="en">English</a></p></div></footer>
+</body></html>

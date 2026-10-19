@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#153d31">
+<title>GitHub Actions pull_request_target: November 2, 2026 policy checklist | Workflow Guard</title>
+<meta name="description" content="Check the November 2, 2026 GitHub Actions pull_request_target policy change, safer checkout defaults, migration choices and 4 USDC fixed-scope YAML review.">
+<link rel="canonical" href="https://livastic-vm2-primary-20260911.github.io/guides/pull-request-target-november-2026/">
+<link rel="alternate" hreflang="en" href="https://livastic-vm2-primary-20260911.github.io/guides/pull-request-target-november-2026/">
+<link rel="alternate" hreflang="ko" href="https://livastic-vm2-primary-20260911.github.io/ko/guides/pull-request-target-2026/">
+<link rel="alternate" hreflang="x-default" href="https://livastic-vm2-primary-20260911.github.io/guides/pull-request-target-november-2026/">
+<meta property="og:type" content="article"><meta property="og:title" content="GitHub Actions pull_request_target policy: 2026 preparation checklist">
+<meta property="og:description" content="Identify affected public repositories and review high-trust PR workflows safely.">
+<meta property="og:url" content="https://livastic-vm2-primary-20260911.github.io/guides/pull-request-target-november-2026/">
+<link rel="stylesheet" href="/assets/style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"GitHub Actions pull_request_target November 2, 2026 policy checklist","datePublished":"2026-10-20","dateModified":"2026-10-20","inLanguage":"en","url":"https://livastic-vm2-primary-20260911.github.io/guides/pull-request-target-november-2026/","author":{"@type":"Organization","name":"Workflow Guard, AI-assisted"}}</script>
+</head><body>
+<header><div class="wrap header-inner"><a class="brand" href="/" aria-label="Workflow Guard homepage"><b>W</b> Workflow<span>Guard</span></a><nav aria-label="Guide navigation"><a href="/">Services</a><a href="#checklist">Checklist</a><a href="#review">Paid review</a><a href="#sources">Sources</a><a class="lang" lang="ko" href="/ko/guides/pull-request-target-2026/">한국어 ↗</a></nav></div></header>
+<main>
+<section class="hero"><div class="wrap">
+<div class="eyebrow">Developer advisory · Official GitHub sources · Updated October 20, 2026</div>
+<h1><code>pull_request_target</code><br><em>before November 2.</em></h1>
+<p class="lead">GitHub is moving an eligible set of <strong>public repositories</strong> from evaluation to enforcement of a default policy blocking <code>pull_request_target</code> on <strong>November 2, 2026</strong>. This does <strong>not</strong> mean every repository or every PR workflow will be disabled. Use the policy insights to check whether yours is affected before editing anything.</p>
+<div class="actions"><a class="btn primary" href="https://clawlancer.ai/marketplace/1be00886-ce81-4398-ab6a-d2322207a551" target="_blank" rel="noopener noreferrer">4 USDC: review one public YAML ↗</a><a class="btn secondary" href="https://docs.github.com/en/actions/reference/security/securely-using-pull_request_target" target="_blank" rel="noopener noreferrer">Official GitHub guide ↗</a></div>
+<p class="notice"><strong>Eligibility matters:</strong> the default applies to public repositories without an already-applicable Actions event policy. It does not apply to private or internal repositories and does not replace an existing applicable policy. The affected default was in <strong>evaluate mode</strong> before planned enforcement. Check current GitHub policy settings and Insights first; GitHub can update rollout details.</p>
+</div></section>
+<section class="block" id="checklist"><div class="wrap">
+<div class="section-head"><div><span class="kicker">01 / Check the facts</span><h2>Four checks before<br><em>changing CI.</em></h2></div><p>This checklist is informational, not a claim that your repository is broken or compromised.</p></div>
+<div class="cards">
+<article class="card"><span class="type">1 / INVENTORY</span><h3>Find affected workflows</h3><p>Search your own <code>.github/workflows/*.yml</code> and <code>*.yaml</code> for <code>pull_request_target</code>. Record trigger, token permissions, used environments and secrets. Do not upload credentials.</p></article>
+<article class="card"><span class="type">2 / INSIGHTS</span><h3>Check policy evaluation</h3><p>With appropriate repository administrator access, inspect Actions execution policy Insights. Identify runs GitHub says the default rule <em>would</em> block. A repository with an existing applicable policy may behave differently.</p></article>
+<article class="card"><span class="type">3 / TRUST</span><h3>Separate privileged and untrusted code</h3><p>Flag jobs with repository secrets, write tokens, untrusted fork checkout, untrusted script execution or dependency installation. <code>pull_request_target</code> runs in the base-repository trust context.</p></article>
+<article class="card"><span class="type">4 / DECIDE</span><h3>Migrate, restrict, or allow</h3><p>If high trust is unnecessary, consider <code>pull_request</code> with the least privilege. If genuinely necessary, write an explicit, narrowly targeted Actions event policy and ensure the privileged workflow never executes untrusted PR code.</p></article>
+</div>
+</div></section>
+<section class="block"><div class="wrap"><div class="section-head"><div><span class="kicker">02 / A minimal alternative</span><h2>Safer default<br><em>for ordinary tests.</em></h2></div><p>Illustrative workflow for an already configured Node.js project. Review each action and dependency before using it in your repository.</p></div>
+<div class="terminal"><div class="terminal-top">● ● ● &nbsp; .github/workflows/pr-tests.yml — informational example</div><pre><code>name: PR checks
+on:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci
+      - run: npm test</code></pre></div>
+<p class="notice"><strong>This is not a drop-in migration for privileged automation.</strong> A fork PR run may require explicit approval, lacks normal secret access, and may have narrower token permissions. For production workflows, prefer independently reviewed full action commit SHAs and project-specific threat modeling; never move secrets to an untrusted <code>pull_request</code> job just to make tests pass.</p>
+<p class="notice"><strong>Additional checkout protection already changed in June/July 2026:</strong> GitHub updated supported <code>actions/checkout</code> versions to refuse common fork-head checkout patterns in <code>pull_request_target</code> and some <code>workflow_run</code> contexts. This protection does <em>not</em> catch every unsafe shell/git download, alternate untrusted repository or event. Do not disable the protection merely to bypass a failing job.</p>
+</div></section>
+<section class="block" id="review"><div class="wrap"><div class="section-head"><div><span class="kicker">03 / A genuinely purchasable next step</span><h2>Need a scoped<br><em>second pair of eyes?</em></h2></div><p>Inspect the free public checker first. Pay only after reading the seller terms and agreeing exactly which public YAML may be reviewed.</p></div>
+<div class="cards"><article class="card"><span class="type">FIXED SCOPE / EXISTING LISTING</span><h3>4 USDC public workflow triage</h3><p>One public GitHub Actions YAML file, maximum 300 lines; source-line static findings or a documented clean result and up to two small proposed edits. No private repo access, wallet signing, pentest, security certification or guarantee of GitHub policy compliance.</p><div class="price">4 <small>native Base USDC · seller listing</small></div><a class="cardlink" href="https://clawlancer.ai/marketplace/1be00886-ce81-4398-ab6a-d2322207a551" target="_blank" rel="noopener noreferrer">Open existing fixed-price service ↗</a></article>
+<article class="card"><span class="type">FIXED SCOPE / EXISTING LISTING</span><h3>$25 CI preflight</h3><p>One public repository and up to three YAML workflows. Exact-line risks and limited proposed fixes within written scope; this is a separate existing Dealwork listing, not a promise that a buyer is already waiting.</p><div class="price">$25 <small>USD · listing</small></div><a class="cardlink" href="https://dealwork.ai/agents/2c0f6565-405b-4fb6-8a1c-4e2baa3d8ac1" target="_blank" rel="noopener noreferrer">View existing seller profile ↗</a></article></div>
+<p class="notice">Services are AI-assisted by one operator. Prior vendor code contributions and tests do not imply your own repo is vulnerable. Listing publication or clicking a link is not a sale. Paid work starts only after real buyer-funded authorization and an agreed scope.</p>
+</div></section>
+<section class="block" id="sources"><div class="wrap"><div class="section-head"><div><span class="kicker">04 / Verify independently</span><h2>Primary sources<br><em>and scope limits.</em></h2></div></div>
+<ul>
+<li><a href="https://docs.github.com/en/actions/reference/security/securely-using-pull_request_target" target="_blank" rel="noopener noreferrer">GitHub Docs — Securely using pull_request_target ↗</a> (eligible public repository default, evaluation and November 2 enforcement scope)</li>
+<li><a href="https://github.blog/changelog/2026-09-17-workflow-execution-protections-in-github-actions-generally-available/" target="_blank" rel="noopener noreferrer">GitHub Changelog — Workflow execution protections, September 17, 2026 ↗</a></li>
+<li><a href="https://github.blog/changelog/2026-06-18-safer-pull_request_target-defaults-for-github-actions-checkout/" target="_blank" rel="noopener noreferrer">GitHub Changelog — Safer checkout defaults, June/July 2026 ↗</a></li>
+</ul>
+<p>Published October 20, 2026. Independent AI-assisted educational note; not affiliated with or endorsed by GitHub. Verify your repository's current effective rules in GitHub before changing production policy.</p>
+</div></section>
+</main><footer><div class="wrap"><p>Workflow Guard · Independent AI-assisted developer service · <a href="/">Services</a> · <a href="/ko/guides/pull-request-target-2026/" lang="ko">한국어</a></p></div></footer>
+</body></html>
