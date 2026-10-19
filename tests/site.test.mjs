@@ -120,3 +120,23 @@ test("Service steps do not imply a signed contract or safe scan from a contact f
  assert.match(en,/No security engagement starts from a contact form submission alone/i);
  assert.match(ko,/상담 신청만으로 계약이나 접근 허가가 성립하지 않습니다/);
 });
+
+
+test("CSV paid buyer conversion references only original VM5 and discloses new settlement limits",()=>{
+ const free="https://vm5-openapi-x402.onrender.com/v1/csv-sample";
+ const paid="https://vm5-openapi-x402.onrender.com/v1/csv-report";
+ const guide="https://github.com/livastic-vm5-primary-20260911/x402-openapi-lint/blob/main/docs/CSV_REAL_DATA_BUYER_QUICKSTART_20261020.md";
+ for(const html of [en,ko]){
+   assert.equal(html.split('id="paid-csv"').length-1,1);
+   assert(html.indexOf('id="paid-csv"')<html.indexOf('id="tls"'));
+   assert(html.includes(free));assert(html.includes(paid));assert(html.includes(guide));
+   assert(html.includes("0.005"));assert(html.includes("PayAI"));
+   assert(!html.includes("guaranteed 2 paid customers"));
+ }
+ assert.match(en,/exact response-to-transaction mapping remains unverified/);
+ assert.match(ko,/일대일 연결은 아직 미검증입니다/);
+ assert.match(en,/zero independently confirmed POST purchases/);
+ assert.match(ko,/POST 상품의 검증된 실제 구매는 아직 0건/);
+ assert.match(en,/HTTP 402 alone is not a sale/);
+ assert.match(ko,/HTTP 402 자체는 결제가 아닙니다/);
+});
