@@ -80,6 +80,19 @@ test("Accepted independent software fix is documented as unpaid, not a customer"
  assert.match(ko,/아직 SwarmMemo 보상금은 실제 입금되지/);
  assert.match(ko,/PR도 열려/);
 });
+test("Same-owner VM5 paid APIs are linked honestly without claiming VM2 sales",()=>{
+ const doc="https://vm5-openapi-x402.onrender.com/llms.txt";
+ const spec="https://vm5-openapi-x402.onrender.com/openapi.json";
+ for(const html of [en,ko]){
+  assert.equal(html.split(doc).length-1,1);
+  assert.equal(html.split(spec).length-1,1);
+  assert(html.includes("0.010 USDC"));
+  assert(html.includes("0.005 USDC"));
+  assert(html.includes("1be00886-ce81-4398-ab6a-d2322207a551"));
+ }
+ assert.match(en,/not recurring subscriptions or VM2 service orders/);
+ assert.match(ko,/정기 구독이나 VM2 판매 상품의 주문 실적이 아닙니다/);
+});
 test("All external new-tab links use noopener noreferrer",()=>{
  for(const html of [en,ko]){
   const anchors=[...html.matchAll(/<a\b[^>]*>/g)].map(m=>m[0]);
