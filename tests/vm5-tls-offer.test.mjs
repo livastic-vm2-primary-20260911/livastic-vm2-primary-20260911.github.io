@@ -26,6 +26,16 @@ test('both languages explicitly say new TLS product has zero actual paid custome
  assert.match(ko,/내부 IP/);
 });
 
+test('TLS paid product is discoverable near the top without fake purchase proof',()=>{
+ for(const html of [en,ko]){
+  const hero=html.indexOf('class="hero-tls" id="tls"');
+  const proof=html.indexOf('class="stats"');
+  assert.ok(hero>0 && hero<proof,"Paid TLS preflight must appear before the proof grid");
+  assert.ok(html.indexOf('/v1/tls-certificate-sample')<proof,"Free demo should be above fold");
+ }
+ assert.match(en,/<meta name="description" content="[^"]*TLS certificate expiry[^"]*">/);
+ assert.match(ko,/<meta name="description" content="[^"]*TLS 인증서 만료일[^"]*">/);
+});
 test('public x402 discovery uses one ORIGINAL VM5 recipient and correct 5000 atomic price',()=>{
  assert.equal(manifest.resources.length,4);
  const tls=manifest.resources.at(-1);

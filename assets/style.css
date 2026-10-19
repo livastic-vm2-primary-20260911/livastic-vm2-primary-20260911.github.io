@@ -25,6 +25,12 @@ nav .lang{border:1px solid var(--border);padding:7px 12px;border-radius:6px}
 .btn{display:inline-flex;justify-content:space-between;align-items:center;gap:26px;padding:12px 20px;border-radius:7px;border:1px solid transparent;text-decoration:none;font-size:12px;font-weight:800;min-height:50px}
 .primary{background:var(--forest);color:white}.primary:hover{background:#285d48}
 .secondary{background:#ffffffa1;border-color:#91b09c}.secondary:hover{background:white}
+
+.hero-tls{border:1px solid #97c2a2;background:#fafff5e8;color:#335944;
+ padding:14px 17px;border-radius:9px;margin:19px 0 0;
+ font-size:12px;line-height:1.75;box-shadow:0 7px 20px #1c58440a}
+.hero-tls a{font-weight:800;text-decoration:underline;text-underline-offset:3px;color:#196847}
+.hero-tls strong{color:#194f36}
 .microfacts{font-size:11px;font-weight:700;color:#537c67;display:flex;gap:18px;flex-wrap:wrap;margin-top:27px}
 .terminal{background:#11271f;color:#d5ead9;border:1px solid #284e3c;border-radius:13px;box-shadow:0 24px 44px #11392724;transform:rotate(.8deg);overflow:hidden;font:12px/1.9 Consolas,monospace}
 .terminal-top{background:#1c3d30;border-bottom:1px solid #3d604b;padding:9px 16px;font-size:10px;color:#a9cbbb}
