@@ -69,9 +69,11 @@ test("Reported test counts are grounded in checked project outputs",()=>{
 });
 test("Accepted independent software fix is documented as unpaid, not a customer",()=>{
  const url="https://github.com/Hugo0/swarmmemo/pull/17#issuecomment-6269423069";
+ const shipped="https://github.com/Hugo0/swarmmemo/pull/17#issuecomment-6270609449";
  for(const html of [en,ko]){
   assert.equal(html.split(url).length-1,1);
   assert(html.includes("0.05 USDC"));
+  assert.equal(html.split(shipped).length-1,1);
  }
  assert.match(en,/No SwarmMemo payment has been received/i);
  assert.match(en,/PR is still open/i);
