@@ -42,6 +42,19 @@ test("Real offer links present; no fabricated checkout/Stripe buttons",()=>{
   assert(!html.includes("connectWallet("));
  }
 });
+test("Low-priced new real Clawlancer listing has bilingual order CTAs with honest non-sale status",()=>{
+ const starter="https://clawlancer.ai/marketplace/1be00886-ce81-4398-ab6a-d2322207a551";
+ for(const html of [en,ko]){
+  assert.equal((html.match(new RegExp(starter,"g"))||[]).length,2);
+  assert(html.includes("4 USDC"));
+  assert(html.includes("300"));
+  assert(html.includes("bec9d133-5388-4ecb-ad42-98bcf961ad4e")); // retain original 25 USDC choice
+ }
+ assert.match(en,/not a security audit or guarantee/);
+ assert.match(ko,/정식 보안 감사나 안전 보증/);
+ assert.match(en,/no verified paying customers/i);
+ assert.match(ko,/실제 유료 구매 및 수령 실적은 아직 확인되지/);
+});
 test("No unverified real customer, reviews, income or certification claims",()=>{
  assert.match(en,/no verified paying customers|no verified paid clients/i);
  assert.match(ko,/실제 유료 구매 및 수령 실적은 아직 확인되지/);
