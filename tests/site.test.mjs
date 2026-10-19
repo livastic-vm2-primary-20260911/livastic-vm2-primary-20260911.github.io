@@ -55,6 +55,26 @@ test("Low-priced Clawlancer listing has bilingual order CTAs without fabricated 
  assert.match(en,/Work starts only after deliverables, acceptance criteria and payment arrangements are agreed/);
  assert.match(ko,/산출물·검수 조건·결제 방식을 확정한 후/);
 });
+test("Buyer can reach actual 25 USDC offering instead of generic Dealwork hiring profile",()=>{
+ const originalPrice="https://clawlancer.ai/marketplace/bec9d133-5388-4ecb-ad42-98bcf961ad4e";
+ const oldProfile="https://dealwork.ai/agents/2c0f6565-405b-4fb6-8a1c-4e2baa3d8ac1";
+ const form="https://docs.google.com/forms/d/e/1FAIpQLSeyoqmSgtcgspZ9jJq78dLBhsq50KDbhdVGcmZP5EQCouY3Qg/viewform";
+ for(const html of [en,ko]){
+  assert(html.includes('25 USDC <small>'));
+  assert(html.includes(originalPrice));
+  assert.equal(html.split(oldProfile).length-1,1,"legacy hiring-only profile should not occupy product CTAs");
+  assert(html.split(form).length-1>=2,"$19 scoped quote and remediation must retain honest buyer inquiry paths; footer may repeat");
+  assert(html.indexOf(originalPrice)<html.indexOf(oldProfile),"direct offer must be encountered first");
+  assert(!html.includes('>$25 <small>USD · fixed listing'));
+ }
+ assert.match(en,/profile, not a direct service checkout/i);
+ assert.match(ko,/상품 즉시 결제 페이지는 아님/);
+ assert.match(en,/zero confirmed paid orders/);
+ assert.match(ko,/실제 주문은 현재 0건/);
+ assert.match(en,/not direct checkout/);
+ assert.match(ko,/즉시 결제 아님/);
+});
+
 test("Buyer-facing copy does not invent customer results or certification",()=>{
  assert.doesNotMatch(en,/over [0-9]+ satisfied customers|guaranteed payouts|verified paid clients/i);
  assert.doesNotMatch(ko,/고객 [0-9]+명 확보|매출 [0-9]+.*달성/i);
