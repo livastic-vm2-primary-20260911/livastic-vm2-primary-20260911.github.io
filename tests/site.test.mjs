@@ -42,7 +42,7 @@ test("Real offer links present; no fabricated checkout/Stripe buttons",()=>{
   assert(!html.includes("connectWallet("));
  }
 });
-test("Low-priced new real Clawlancer listing has bilingual order CTAs with honest non-sale status",()=>{
+test("Low-priced Clawlancer listing has bilingual order CTAs without fabricated sales claims",()=>{
  const starter="https://clawlancer.ai/marketplace/1be00886-ce81-4398-ab6a-d2322207a551";
  for(const html of [en,ko]){
   assert.equal((html.match(new RegExp(starter,"g"))||[]).length,2);
@@ -52,18 +52,18 @@ test("Low-priced new real Clawlancer listing has bilingual order CTAs with hones
  }
  assert.match(en,/not a security audit or guarantee/);
  assert.match(ko,/정식 보안 감사나 안전 보증/);
- assert.match(en,/no verified paying customers/i);
- assert.match(ko,/실제 유료 구매 및 수령 실적은 아직 확인되지/);
+ assert.match(en,/Work starts only after deliverables, acceptance criteria and payment arrangements are agreed/);
+ assert.match(ko,/산출물·검수 조건·결제 방식을 확정한 후/);
 });
-test("No unverified real customer, reviews, income or certification claims",()=>{
- assert.match(en,/no verified paying customers|no verified paid clients/i);
- assert.match(ko,/실제 유료 구매 및 수령 실적은 아직 확인되지/);
+test("Buyer-facing copy does not invent customer results or certification",()=>{
+ assert.doesNotMatch(en,/over [0-9]+ satisfied customers|guaranteed payouts|verified paid clients/i);
+ assert.doesNotMatch(ko,/고객 [0-9]+명 확보|매출 [0-9]+.*달성/i);
  assert.match(en,/not formal security audits|not security certification|security certification/i);
  assert.match(ko,/보안 인증|보안 감사/);
 });
 test("Reported test counts are grounded in checked project outputs",()=>{
  for(const html of [en,ko]){
-  assert.match(html,/(40 passing checks|40개 자동 테스트 통과)/);
+  assert.match(html,/(41 passing checks|41개 자동 테스트 통과)/);
   assert.match(html,/(24 pytest cases|24개 pytest)/);
  }
 });
