@@ -51,6 +51,21 @@
           "maxTimeoutSeconds": 300
         }
       ]
+    },
+    {
+      "url": "https://vm5-openapi-x402.onrender.com/v1/https-cert-preflight?domain=github.com",
+      "method": "GET",
+      "description": "Inspect public HTTPS X.509 certificate expiry, issuer and observed local chain authorization and hostname match on one globally routable IPv4 443 endpoint. No web page content, private IP, ownership or comprehensive security certification.",
+      "accepts": [
+        {
+          "scheme": "exact",
+          "network": "eip155:8453",
+          "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+          "amount": "5000",
+          "payTo": "0x6b01efA0705E91a7aca54271510bf9e594717f34",
+          "maxTimeoutSeconds": 300
+        }
+      ]
     }
   ]
 }

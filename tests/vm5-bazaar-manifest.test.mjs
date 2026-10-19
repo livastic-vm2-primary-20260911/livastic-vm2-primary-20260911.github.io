@@ -4,9 +4,9 @@ import { readFileSync } from 'node:fs';
 const data = JSON.parse(readFileSync(new URL('../vm5-x402-agent-bazaar.json', import.meta.url), 'utf8'));
 test('same-owner paid API listing: valid manifest and truthful supported prices', () => {
   assert.equal(data.x402Version, 2);
-  assert.equal(data.resources.length, 3);
-  const amounts = ['10000', '5000', '5000'];
-  const paths = ['/v1/x402-template', '/v1/csv-report', '/v1/email-dns-preflight?domain=gmail.com'];
+  assert.equal(data.resources.length, 4);
+  const amounts = ['10000', '5000', '5000', '5000'];
+  const paths = ['/v1/x402-template', '/v1/csv-report', '/v1/email-dns-preflight?domain=gmail.com', '/v1/https-cert-preflight?domain=github.com'];
   for (const [i, entry] of data.resources.entries()) {
     assert.equal(entry.url, 'https://vm5-openapi-x402.onrender.com' + paths[i]);
     assert.equal(entry.method, 'GET');

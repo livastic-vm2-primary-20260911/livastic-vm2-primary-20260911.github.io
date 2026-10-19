@@ -20,6 +20,7 @@ ROUTES = (
     ("/v1/x402-template", "10000", "Download an original x402 v2 OpenAPI example with a reproducible Redocly lint result; reference template, not a production security audit."),
     ("/v1/csv-report", "5000", "Get a reproducible demonstration CSV quality report (duplicate rows, invalid fields, CSV formula-injection warnings). Sample data, not customer data."),
     ("/v1/email-dns-preflight?domain=gmail.com", "5000", "Get a bounded public DNS report for MX, SPF, DMARC and A records for a chosen domain. Not mailbox or email deliverability verification."),
+    ("/v1/https-cert-preflight?domain=github.com", "5000", "Inspect public HTTPS X.509 certificate expiry, issuer and observed local chain authorization and hostname match on one globally routable IPv4 443 endpoint. No web page content, private IP, ownership or comprehensive security certification."),
 )
 OUT = Path(__file__).resolve().parent.parent / "vm5-x402-agent-bazaar.json"
 
