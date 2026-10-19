@@ -63,9 +63,20 @@ test("Buyer-facing copy does not invent customer results or certification",()=>{
 });
 test("Reported test counts are grounded in checked project outputs",()=>{
  for(const html of [en,ko]){
-  assert.match(html,/(41 passing checks|41개 자동 테스트 통과)/);
+  assert.match(html,/(42 passing checks|42개 자동 테스트 통과)/);
   assert.match(html,/(24 pytest cases|24개 pytest)/);
  }
+});
+test("Accepted independent software fix is documented as unpaid, not a customer",()=>{
+ const url="https://github.com/Hugo0/swarmmemo/pull/17#issuecomment-6269423069";
+ for(const html of [en,ko]){
+  assert.equal(html.split(url).length-1,1);
+  assert(html.includes("0.05 USDC"));
+ }
+ assert.match(en,/No SwarmMemo payment has been received/i);
+ assert.match(en,/PR is still open/i);
+ assert.match(ko,/아직 SwarmMemo 보상금은 실제 입금되지/);
+ assert.match(ko,/PR도 열려/);
 });
 test("All external new-tab links use noopener noreferrer",()=>{
  for(const html of [en,ko]){
