@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#153d31">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self'; connect-src 'none'; form-action 'none'; object-src 'none'; base-uri 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self'; connect-src https://vm5-openapi-x402.onrender.com; form-action 'none'; object-src 'none'; base-uri 'none'">
 <title>CSV Import Rescue — Free Local Check + Optional 0.005 USDC API</title>
 <meta name="description" content="Check CSV imports for mismatched columns, duplicate headers, blank cells and spreadsheet-formula warnings entirely in your browser; optional 0.005 Base USDC x402 API.">
 <link rel="canonical" href="https://livastic-vm2-primary-20260911.github.io/csv-checker/">
@@ -36,6 +36,7 @@ button{cursor:pointer;font-family:inherit}.checks{display:flex;flex-wrap:wrap;ga
 @media(max-width:800px){.check-grid,.compare{grid-template-columns:1fr}.checker{padding:32px 0 60px}.panel{padding:17px}}
 </style>
 <script type="module" src="/assets/csv-checker-ui.mjs"></script>
+<script type="module" src="/assets/csv-wallet-ui.mjs"></script>
 </head>
 <body>
 <header><div class="wrap header-inner"><a class="brand" href="/"><b>W</b> Workflow<span>Guard</span></a><nav><a href="/">Home</a><a href="/csv-preflight/">CSV API</a><a class="lang" href="/ko/csv-checker/">한국어</a></nav></div></header>
@@ -61,12 +62,14 @@ button{cursor:pointer;font-family:inherit}.checks{display:flex;flex-wrap:wrap;ga
 <section id="paid" class="panel"><span class="eyebrow">x402 • Base • USDC 0.005</span><h2>Need an agent-ready paid check?</h2>
 <p>The same owner's separate VM5 service offers a paid RFC4180-style CSV report for 0.005 native Circle USDC on Base (eip155:8453) per independently authorized POST. It processes up to 32 KiB of non-sensitive buyer-supplied CSV. No subscription.</p>
 <p class="smallprint">Do not send customer PII, secrets, wallet keys, invoices, confidential CSV, medical or financial records to any external API. Use only free local checking for private content.</p>
-<label class="optin"><input type="checkbox" id="share-consent"><span>I own this CSV or have permission to process it externally. I understand that copying a payment payload includes my original CSV and may expose it if I paste it into another service.</span></label>
+<label class="optin"><input type="checkbox" id="share-consent"><span>I own this CSV or have permission to process it externally. I understand that copying the payload exposes the original CSV to my clipboard; using the optional wallet checkout sends my CSV to the separate VM5 server. Do not use sensitive data.</span></label>
+<label class="optin"><input type="checkbox" id="payment-consent"><span>I authorize the optional, single 0.005 native Circle USDC payment on Base (chain 8453) to the displayed original VM5 merchant wallet. Signing an EIP-712 authorization can move real funds. I understand it is not refundable just because I change my mind.</span></label>
 <div class="actions">
-<button type="button" id="copy-paid" class="btn primary">Copy my JSON request (no upload or payment)</button>
+<button type="button" id="wallet-pay" class="btn primary">Pay 0.005 USDC with my own wallet ↗</button>
+<button type="button" id="copy-paid" class="btn secondary">Copy my JSON request (no upload or payment)</button>
 <a class="btn secondary" target="_blank" rel="noopener noreferrer" href="https://github.com/livastic-vm5-primary-20260911/x402-openapi-lint/blob/main/docs/CSV_REAL_DATA_BUYER_QUICKSTART_20261020.md">View buyer payment &amp; API instructions ↗</a>
 <a class="btn secondary" target="_blank" rel="noopener noreferrer" href="https://vm5-openapi-x402.onrender.com/v1/csv-sample">See free fictional server example ↗</a>
-</div><p class="notice-panel">POST /v1/csv-preflight. An unpaid HTTP 402 is a quote, NOT a sale. Your x402-capable client and your own wallet must authorize a separate payment. This web page never signs, pays, uploads or receives a payment.</p>
+</div><p id="wallet-status" class="notice-panel" role="status" aria-live="polite"></p><div id="wallet-result" aria-live="polite"></div><p class="notice-panel">POST /v1/csv-preflight. HTTP 402 is a quote, NOT a sale. The FREE checker never uploads. Only if you select both consent boxes and click Pay does this page send your CSV to the existing VM5 API, ask YOUR wallet to sign a limited 0.005 USDC EIP-3009 authorization and send that signature once for settlement. No private keys, automatic charge, subscription, hidden approval or retry. If settlement is unclear, do NOT sign again before checking your wallet. The separate VM5 operator receives any verified payment, not this static site.</p>
 </section>
 <h2>What is different?</h2>
 <div class="compare"><article><h3>FREE • Browser-local</h3><p>Structural parse, line numbers, duplicate headers/rows, empty cells, formula-like values, JSON findings export. Purely heuristic; not a guarantee of valid import.</p></article><article><h3>PAID • Independent x402 API</h3><p>HTTP POST returns deeper row/column counts, duplicate/empty/type mismatch checks and formula warnings in machine-readable JSON. Buyer-initiated paid server processing—not free, not a security audit.</p></article></div>

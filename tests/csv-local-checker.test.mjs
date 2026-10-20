@@ -104,7 +104,10 @@ test('new EN and KO pages are discoverable static privacy-first client tools',()
   for(const [page,path] of [[en,'/csv-checker/'],[ko,'/ko/csv-checker/']]){
     assert(page.includes('<link rel="canonical" href="https://livastic-vm2-primary-20260911.github.io'+path+'">'));
     assert(page.includes('src="/assets/csv-checker-ui.mjs"'));
-    assert(page.includes("connect-src 'none'"));
+    assert(page.includes("connect-src https://vm5-openapi-x402.onrender.com;"));
+    assert(page.includes('src="/assets/csv-wallet-ui.mjs"'));
+    assert(page.includes('id="wallet-pay"')&&page.includes('id="payment-consent"'));
+    assert(page.includes('id="wallet-status"')&&page.includes('id="wallet-result"'));
     assert(page.includes('id="analyze"')&&page.includes('id="copy-paid"')&&page.includes('id="share-consent"'));
     assert(page.includes('https://github.com/livastic-vm5-primary-20260911/x402-openapi-lint/blob/main/docs/CSV_REAL_DATA_BUYER_QUICKSTART_20261020.md'));
     assert(page.includes('0.005')&&page.includes('eip155:8453'));
@@ -134,4 +137,21 @@ test('Free checker source links point to the ACTUAL same-owner CSV analyzer, not
     assert(html.includes('href="'+exact+'"'));
     assert(!html.includes('href="https://github.com/livastic-vm2-primary-20260911/workflow-risk-check"'));
   }
+});
+
+test('the local CSV route keeps free checks separate from optional pinned wallet spending',()=>{
+  const free=read('assets/csv-checker-ui.mjs');
+  const paid=read('assets/csv-wallet-ui.mjs');
+  const signer=read('assets/x402-wallet-pay.mjs');
+  assert(!/\bfetch\(/.test(free));
+  assert(!/eth_signTypedData/.test(free));
+  assert.match(paid,/share-consent/);
+  assert.match(paid,/payment-consent/);
+  assert.match(paid,/window\.confirm/);
+  assert.match(paid,/if\(busy\|\|signStarted\)return/);
+  assert.match(paid,/button\.disabled=signStarted/);
+  assert.match(signer,/PAYMENT-SIGNATURE/);
+  assert.match(signer,/eth_signTypedData_v4/);
+  assert(!/eth_sendTransaction|eth_sendRawTransaction|wallet_sendCalls/.test(signer));
+  assert(!/localStorage|sessionStorage|document\.cookie/.test(paid+signer));
 });

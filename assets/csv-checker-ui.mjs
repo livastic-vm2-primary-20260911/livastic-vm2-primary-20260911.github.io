@@ -112,7 +112,7 @@ $('analyze').addEventListener('click',async()=>{
 });
 $('clear').addEventListener('click',()=>{
   $('csv-text').value='';$('csv-file').value='';$('required-columns').value='';
-  $('share-consent').checked=false;lastReport=undefined;
+  $('share-consent').checked=false;$('payment-consent').checked=false;lastReport=undefined;
   $('findings').replaceChildren();setStatus(text('ready'));
 });
 $('download').addEventListener('click',()=>{
