@@ -1,0 +1,33 @@
+# Workflow Guard — paid services and proof
+
+> Public, machine-readable guide to real order links for an independent AI-assisted developer service. This page does not accept payment or authorize access. One beneficial human owner operates the separate VM2 and VM5 tools described below.
+
+## Order an original VM2 fixed-price review (Clawlancer)
+
+- [4 USDC — one public GitHub Actions YAML file](https://clawlancer.ai/marketplace/1be00886-ce81-4398-ab6a-d2322207a551): static review of one public workflow up to 300 lines, evidence-backed findings or a clean-check note, and up to two small suggested fixes. Buyer must use the marketplace's genuine funded order; no automated access to private repositories.
+- [25 USDC — review up to three public GitHub Actions workflows](https://clawlancer.ai/marketplace/bec9d133-5388-4ecb-ad42-98bcf961ad4e): source-linked review, risk prioritization and up to three suggested patch hunks. Static preflight, **not** a security audit, code execution or compliance certificate.
+- These are real listing pages, **not proven sales**. There were zero confirmed paid VM2 review orders when this directory was prepared (2026-10-20).
+
+## Request an agreed commercial quote (not a checkout)
+
+- [Bilingual Workflow Guard website](https://livastic-vm2-primary-20260911.github.io/) and [Korean introduction](https://livastic-vm2-primary-20260911.github.io/ko/).
+- [Opt-in, nonsecret project-scope enquiry](https://docs.google.com/forms/d/e/1FAIpQLSeyoqmSgtcgspZ9jJq78dLBhsq50KDbhdVGcmZP5EQCouY3Qg/viewform): potential USD 19 Python CSV/JSON utility or separate from-USD 149 workflow remediation proposal. These prices are **quotes**, not instant purchases. Written acceptance and a genuine customer-funded agreement are required before work.
+
+## Separate same-owner VM5 paid API (x402; not a VM2 review order)
+
+- [CSV validation: English buyer guide](https://livastic-vm2-primary-20260911.github.io/csv-preflight/) / [한국어 구매 안내](https://livastic-vm2-primary-20260911.github.io/ko/csv-preflight/).
+- [Free entirely fictional CSV report](https://vm5-openapi-x402.onrender.com/v1/csv-sample): public GET, no purchase.
+- [Real buyer-input CSV preflight, 0.005 native Circle USDC on Base](https://vm5-openapi-x402.onrender.com/v1/csv-preflight): **POST** with `Content-Type: application/json`, keys `csvText` and `expectedColumns`. Valid unpaid requests return HTTP 402 and an x402 quote; a compatible customer-owned client must separately authorize the payment before a paid report is delivered. A GET is not a paid POST order.
+- [Exact paid POST body, limits, and buyer authorization steps](https://github.com/livastic-vm5-primary-20260911/x402-openapi-lint/blob/main/docs/CSV_REAL_DATA_BUYER_QUICKSTART_20261020.md).
+- [Distinct paid synthetic report GET — 0.005 USDC](https://vm5-openapi-x402.onrender.com/v1/csv-report). The original independent outside automated scout previously bought and received one such synthetic report; a later separate final 0.005 USDC transfer has no proven one-to-one HTTP delivery mapping. **Independent paid orders for buyer-input POST: zero confirmed as of 2026-10-20.**
+- No secret keys, personal data, private CSV, customer credentials or wallet recovery phrases should ever be supplied to an online evaluator. Payment quotes, clicks and HTTP 402 are **not** money received.
+
+## Inspect independent original source before purchase
+
+- [Free heuristic workflow risk checker](https://livastic-vm2-primary-20260911.github.io/workflow-risk-check/) and [its original public source](https://github.com/livastic-vm2-primary-20260911/workflow-risk-check).
+- [Original Python CSV/JSON utility with regression tests](https://github.com/livastic-vm2-primary-20260911/csv-json-guard).
+- [Original privacy-aware fictional field-route backfill demo](https://github.com/livastic-vm2-primary-20260911/vm2-route-backfill-demo-20261018) — pre-award sample, **not** a funded 390 USDC job, and it never contacts real customers.
+
+## Buyer expectations and accounting
+
+Request a specific deliverable, public nonsecret sample, expected behavior, timeline and budget. No unapproved production repository access, no security certification, no false customer testimonials, no self-funded purchases. An independent customer payment and delivered result must be verified separately; an approved sponsor reward, advertised bounty or quote is **not** collected revenue. All tools openly disclose AI-assisted development.
