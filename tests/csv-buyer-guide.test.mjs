@@ -41,3 +41,18 @@ test("Safe links and text-only docs: no automatic pay, tracking scripts or ungua
   assert(!html.includes("google-analytics.com"));assert(!html.includes("gtag("));
  }
 });
+
+test("Buyer-first CTA experiment: actual buyer-input POST purchase guide precedes free-only sample",()=>{
+ const paid="https://github.com/livastic-vm5-primary-20260911/x402-openapi-lint/blob/main/docs/CSV_REAL_DATA_BUYER_QUICKSTART_20261020.md";
+ const free="https://vm5-openapi-x402.onrender.com/v1/csv-sample";
+ for(const html of [en,ko]){
+  const actions=html.match(/<div class="actions">([\s\S]*?)<\/div>/)?.[1];
+  assert(actions,"visible CTA group must exist");
+  assert(actions.includes('class="btn primary" href="'+paid+'"'));
+  assert(actions.includes('class="btn secondary" href="'+free+'"'));
+  assert(actions.indexOf(paid)<actions.indexOf(free));
+  assert(!/<script(?![^>]*application\/ld\+json)/i.test(html));
+ }
+ assert.match(en,/0\.005 USDC payment steps/);
+ assert.match(ko,/0\.005 USDC 구매 절차/);
+});
