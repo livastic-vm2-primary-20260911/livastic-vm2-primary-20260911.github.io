@@ -1,0 +1,51 @@
+{
+  "aiax_version": "0.1",
+  "section_id": "csv_local_private",
+  "purpose": "Free, entirely local browser inspection of text descriptions in a user-provided crypto exchange CSV. Extracts review-only direction and quantity candidates, refuses ambiguous rows and never uploads the file. Not tax advice or importer-ready transactions.",
+  "inputs": {
+    "type": "object",
+    "properties": {
+      "url": {
+        "type": "string",
+        "const": "https://livastic-vm2-primary-20260911.github.io/workflow-risk-usdc-studio/csv/narrative/"
+      },
+      "interaction": {
+        "type": "string",
+        "const": "Use the browser UI with a chosen local source CSV"
+      }
+    },
+    "required": [
+      "url",
+      "interaction"
+    ]
+  },
+  "outputs": "Review-only candidate rows and explicit NOT_PARSED exceptions inside the browser. No remote structured API, upload, transaction finality or Koinly tax file is promised.",
+  "pricing": {
+    "model": "free",
+    "amount": "0",
+    "currency": "USDC",
+    "rail": "none"
+  },
+  "examples": [
+    {
+      "description": "Open the free site and load its fictional CSV example, then analyze locally.",
+      "request": {
+        "url": "https://livastic-vm2-primary-20260911.github.io/workflow-risk-usdc-studio/csv/narrative/",
+        "interaction": "Use the browser UI with a chosen local source CSV"
+      },
+      "response": {
+        "local_only": true,
+        "csv_uploaded": false,
+        "x402_payment_requested": false
+      }
+    }
+  ],
+  "pact_mandate_template": null,
+  "extensions": {
+    "onecursor": {
+      "live_url": "https://livastic-vm2-primary-20260911.github.io/workflow-risk-usdc-studio/csv/narrative/",
+      "sample": "https://livastic-vm2-primary-20260911.github.io/workflow-risk-usdc-studio/csv/mini-review-demo/",
+      "result_status": "review_only_not_import_ready"
+    }
+  }
+}

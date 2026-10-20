@@ -1,0 +1,46 @@
+{
+  "aiax_version": "0.1",
+  "product": {
+    "name": "One Cursor crypto CSV and x402 preflight",
+    "one_line_purpose": "Try crypto CSV checks locally, or explicitly pay for a separate Base USDC x402 report.",
+    "domain": "crypto-csv-quality-x402"
+  },
+  "entry_points": [
+    {
+      "id": "csv_local_private",
+      "url": "https://livastic-vm2-primary-20260911.github.io/aiax/sections/csv_local_private.json",
+      "purpose": "Free browser-only exchange CSV description candidate review; no upload or wallet.",
+      "est_tokens": 265
+    },
+    {
+      "id": "csv_synthetic_report",
+      "url": "https://livastic-vm2-primary-20260911.github.io/aiax/sections/csv_synthetic_report.json",
+      "purpose": "Public fixed synthetic CSV anomaly GET report: 0.005 native Base USDC x402v2.",
+      "est_tokens": 335
+    },
+    {
+      "id": "csv_buyer_preflight",
+      "url": "https://livastic-vm2-primary-20260911.github.io/aiax/sections/csv_buyer_preflight.json",
+      "purpose": "Buyer-consented CSV structural POST preflight: 0.005 native Base USDC x402v2, no verified paid POST customer.",
+      "est_tokens": 430
+    }
+  ],
+  "pricing_summary": "Free browser-only inspector. 0.005 native Circle Base USDC per paid synthetic GET report or separately authorized buyer CSV POST.",
+  "trust_signals": {
+    "score": null,
+    "pact_endpoint": null,
+    "drs_receipt_count": null,
+    "partnerships": []
+  },
+  "mcp_endpoint": null,
+  "updated_at": "2026-10-20T23:51:36Z",
+  "llms_txt_url": "https://livastic-vm2-primary-20260911.github.io/llms.txt",
+  "openapi_url": "https://vm5-openapi-x402.onrender.com/openapi.json",
+  "extensions": {
+    "onecursor": {
+      "beneficial_owner": "One human owner across VM2 and VM5; separate product operators.",
+      "merchant_origin": "https://vm5-openapi-x402.onrender.com",
+      "disclosure": "This discovery manifest is NOT a registered LAX listing, verified buyer, settled receipt or payment authorization."
+    }
+  }
+}

@@ -13,6 +13,8 @@
 - [Bilingual Workflow Guard website](https://livastic-vm2-primary-20260911.github.io/) and [Korean introduction](https://livastic-vm2-primary-20260911.github.io/ko/).
 - [Opt-in, nonsecret project-scope enquiry](https://docs.google.com/forms/d/e/1FAIpQLSeyoqmSgtcgspZ9jJq78dLBhsq50KDbhdVGcmZP5EQCouY3Qg/viewform): potential USD 19 Python CSV/JSON utility or separate from-USD 149 workflow remediation proposal. These prices are **quotes**, not instant purchases. Written acceptance and a genuine customer-funded agreement are required before work.
 
+- [AIAX v0.1 machine-readable discovery manifest](https://livastic-vm2-primary-20260911.github.io/.well-known/aiax.json): honestly describes the free browser-only crypto CSV inspector and the separate VM5 0.005-USDC x402v2 synthetic GET / optional authorized buyer POST, with no settled-buyer or LAX-listing claim.
+
 ## Separate same-owner VM5 paid API (x402; not a VM2 review order)
 
 - [CSV validation: English buyer guide](https://livastic-vm2-primary-20260911.github.io/csv-preflight/) / [한국어 구매 안내](https://livastic-vm2-primary-20260911.github.io/ko/csv-preflight/).

@@ -1,0 +1,67 @@
+{
+  "aiax_version": "0.1",
+  "section_id": "csv_buyer_preflight",
+  "purpose": "Original VM5 x402v2 POST service for one explicitly buyer-consented CSV structural quality preflight. The buyer supplies a bounded CSV through the hosted VM5 server only AFTER understanding the data disclosure and signing separate native Base USDC payment; no audited security or verified paid POST customers are asserted.",
+  "inputs": {
+    "type": "object",
+    "properties": {
+      "csvText": {
+        "type": "string",
+        "description": "Buyer-authorized and sanitized CSV only; no private tax exports, wallet keys or credentials."
+      },
+      "expectedColumns": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "required": [
+      "csvText",
+      "expectedColumns"
+    ],
+    "additionalProperties": false
+  },
+  "outputs": "If the owner authorizes settlement and the service processes a lawful CSV, a structural report may cover duplicated rows, type/width/date errors and spreadsheet formula risks. An unpaid request returns HTTP 402, not data-quality results.",
+  "pricing": {
+    "model": "per_call",
+    "amount": "0.005",
+    "currency": "USDC",
+    "rail": "x402"
+  },
+  "examples": [
+    {
+      "description": "Entirely fictional unpaid POST quote; synthetic data only and NO PAYMENT-SIGNATURE.",
+      "request": {
+        "method": "POST",
+        "url": "https://vm5-openapi-x402.onrender.com/v1/csv-preflight",
+        "contentType": "application/json",
+        "body": {
+          "csvText": "email,amount,date,note\na@example.com,12.5,2026-10-19,paid\n",
+          "expectedColumns": [
+            "email",
+            "amount",
+            "date",
+            "note"
+          ]
+        }
+      },
+      "response": {
+        "status": 402,
+        "paid": false,
+        "note": "Quoted only; user must consent and sign separately to upload real authorized CSV after payment."
+      }
+    }
+  ],
+  "pact_mandate_template": null,
+  "extensions": {
+    "onecursor": {
+      "network": "eip155:8453",
+      "native_circle_usdc_asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+      "original_merchant": "https://vm5-openapi-x402.onrender.com/v1/csv-preflight",
+      "buyer_private_source_is_submitted_remotely": true,
+      "independent_verified_paid_buyer_post_orders": 0,
+      "user_data_advisory": "Do not submit sensitive customer exports, IDs, transaction hashes or wallet keys."
+    }
+  }
+}

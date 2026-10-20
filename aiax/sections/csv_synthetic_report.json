@@ -1,0 +1,53 @@
+{
+  "aiax_version": "0.1",
+  "section_id": "csv_synthetic_report",
+  "purpose": "Original VM5 paid GET convenience report for a FIXED publicly disclosed synthetic CSV, showing duplicate rows, malformed fields and formula-injection warnings. No buyer-owned CSV is analyzed by this GET. x402 v2, exact, native Circle USDC on Base.",
+  "inputs": {
+    "type": "object",
+    "properties": {
+      "method": {
+        "const": "GET"
+      },
+      "url": {
+        "type": "string",
+        "const": "https://vm5-openapi-x402.onrender.com/v1/csv-report"
+      }
+    },
+    "required": [
+      "method",
+      "url"
+    ]
+  },
+  "outputs": "Paid structured JSON of a disclosed fictional dataset only, not the buyer's CSV. Without a separately authorized compatible payment the server returns HTTP 402 with PAYMENT-REQUIRED.",
+  "pricing": {
+    "model": "per_call",
+    "amount": "0.005",
+    "currency": "USDC",
+    "rail": "x402"
+  },
+  "examples": [
+    {
+      "description": "Unsigned quote discovery only; never a payment or delivered paid report.",
+      "request": {
+        "method": "GET",
+        "url": "https://vm5-openapi-x402.onrender.com/v1/csv-report"
+      },
+      "response": {
+        "status": 402,
+        "payment_required_header": "base64-encoded x402Version 2 payment requirements, not a signature",
+        "paid": false
+      }
+    }
+  ],
+  "pact_mandate_template": null,
+  "openapi_operation_id": "buyOriginalCSVDemoReport",
+  "extensions": {
+    "onecursor": {
+      "network": "eip155:8453",
+      "native_circle_usdc_asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+      "free_synthetic_preview": "https://vm5-openapi-x402.onrender.com/v1/csv-sample",
+      "buyer_input_csv_processed": false,
+      "settlement_or_buyer_claimed_from_unpaid_quote": false
+    }
+  }
+}
