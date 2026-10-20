@@ -15,6 +15,13 @@ The independent GitHub account maintains GitHub Actions workflow static checks, 
 - Source-only [experimental x402 workflow check API](https://github.com/livastic-vm2-primary-20260911/workflow-risk-x402), **NOT a hosted paid service and NOT a payment receipt**.
 - Free [TaskProof](https://livastic-vm2-primary-20260911.github.io/taskproof-ai/) speculation and checklist tool; local FLAN-T5 branch not proven to run reliably.
 
+## Free interactive local CSV rescue tool (EN/KO)
+
+- Live-intended EN /csv-checker/ and KO /ko/csv-checker/: choose a local UTF-8 CSV (at most 256KiB) or paste text, then run the entirely browser-local RFC4180-style heuristic preflight. No raw CSV upload, telemetry, cookie, account or wallet needed.
+- Reports structural quote and column-count problems, duplicate/blank headers, missing expected headers, duplicate/blank rows and CSV spreadsheet-formula warnings. Use as a preflight only; negative numbers may trigger formula warnings. JSON result exports only codes, row/column numbers and counts, no user CSV cells or filenames.
+- Separate original VM5 x402 API at POST https://vm5-openapi-x402.onrender.com/v1/csv-preflight costs 0.005 native Circle Base USDC per buyer-authorized call for at most 32KiB of non-sensitive data. User must affirm consent before copying the JSON payload containing raw CSV to their clipboard. The free site does not POST or sign a payment, and HTTP402 is just a quote. The distinct VM5 merchant, not this VM2 static site, earns any actual independent customer settlements.
+- Regression: npm test; see tests/csv-local-checker.test.mjs. Actual GitHub Pages deployment, independent visitors and paid POST orders must be established separately; this README alone proves none.
+
 ## Privacy and constraints
 
 The site itself collects no user information, has no account signup or checkout and includes no user tracking scripts. All contact form submission is handled by Google Forms with the reply email provided voluntarily. Do not submit secrets, private YAML or recovery phrases. Dealwork.ai and Clawlancer are separate marketplace providers with their own identity, payment, data and tax policies. The operator may only conduct explicitly scoped, properly funded, authorized work and may not represent a free scanner as a certified security audit.

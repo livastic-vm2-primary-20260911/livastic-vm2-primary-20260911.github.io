@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#153d31">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self'; connect-src 'none'; form-action 'none'; object-src 'none'; base-uri 'none'">
+<title>CSV 가져오기 오류 검사 — 무료 로컬 분석 · 선택형 0.005 USDC API</title>
+<meta name="description" content="CSV 열 불일치, 중복 헤더·데이터, 빈 칸, 수식 실행 의심값을 브라우저 안에서 검사합니다. 별도 Base USDC 0.005 x402 분석 선택 가능.">
+<link rel="canonical" href="https://livastic-vm2-primary-20260911.github.io/ko/csv-checker/">
+<link rel="alternate" hreflang="en" href="https://livastic-vm2-primary-20260911.github.io/csv-checker/">
+<link rel="alternate" hreflang="ko" href="https://livastic-vm2-primary-20260911.github.io/ko/csv-checker/">
+<link rel="alternate" hreflang="x-default" href="https://livastic-vm2-primary-20260911.github.io/csv-checker/">
+<link rel="stylesheet" href="/assets/style.css">
+<style>
+.checker{padding:58px 0 76px}.checker h1{font-size:clamp(34px,5vw,58px);line-height:1.14;max-width:850px;margin:20px 0}
+.checker .lead{max-width:850px}.check-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(280px,.7fr);gap:24px;margin:32px 0}
+.panel{background:#fffefa;border:1px solid #c8d9cc;padding:25px;border-radius:14px;box-shadow:0 8px 22px #16422e0b}
+.panel h2{margin-top:0;font-size:24px}.field{margin:17px 0}.field label{display:block;font-weight:800;font-size:13px;margin-bottom:8px}
+.field input[type=file],.field input[type=text],.field textarea{display:block;width:100%;padding:11px;background:white;color:#17382b;border:1px solid #b9cabc;border-radius:6px;font:13px/1.55 ui-monospace,monospace}
+.field textarea{min-height:210px;resize:vertical}
+.field input:focus-visible,.field textarea:focus-visible,button:focus-visible{outline:3px solid #18745e;outline-offset:2px}
+button{cursor:pointer;font-family:inherit}.checks{display:flex;flex-wrap:wrap;gap:9px}
+.checks button{border:1px solid #a3bbae;padding:11px 13px;background:#f5faf4;color:#194332;border-radius:6px;font-weight:700}
+.checks button.primary{background:#153d31;color:#fff;border-color:#153d31}
+#status{padding:13px;border-radius:7px;background:#e4f1e7;color:#1e5137;min-height:50px}
+#findings .result-summary{font-weight:800}.findings-list{padding:0;list-style:none;max-height:320px;overflow:auto}
+.findings-list li{padding:7px 10px;border-bottom:1px solid #d8e4d8;font:12px/1.7 ui-monospace,monospace}
+.findings-list .problem{color:#a04127}.findings-list .caution{color:#805d22}
+.notice-panel{background:#ecf5ed;border:1px solid #d4e3d5;border-radius:9px;padding:18px;margin-top:18px;font-size:13px}
+.notice-panel p{margin:.3em 0 .7em}.optin{display:flex;gap:10px;align-items:flex-start;font-size:13px;line-height:1.65}
+.optin input{margin-top:4px;transform:scale(1.2);accent-color:#16694d}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:27px 0}
+.compare article{padding:22px;border:1px solid #d1dfd1;border-radius:9px;background:#fff}
+.compare h3{margin:0 0 8px}.compare p{font-size:13px;color:#536c5e}
+.smallprint{color:#61786b;font-size:12px;max-width:860px}
+@media(max-width:800px){.check-grid,.compare{grid-template-columns:1fr}.checker{padding:32px 0 60px}.panel{padding:17px}}
+</style>
+<script type="module" src="/assets/csv-checker-ui.mjs"></script>
+</head>
+<body>
+<header><div class="wrap header-inner"><a class="brand" href="/ko/"><b>W</b> Workflow<span>Guard</span></a><nav><a href="/ko/">홈</a><a href="/csv-preflight/">CSV API</a><a class="lang" href="/csv-checker/">English</a></nav></div></header>
+<main class="checker"><div class="wrap">
+<p class="eyebrow">무료 • 기본적으로 로컬 • 가입 불필요</p><h1>CSV를 업로드하기 전에 오류부터 찾으세요.</h1><p class="lead">CSV를 붙여넣거나 파일을 선택하세요. 검사는 이 브라우저 안에서만 실행하며 가입·지갑·업로드가 필요 없습니다. 스프레드시트, CRM, AI 에이전트 또는 DB 가져오기 전에 구조 문제를 파악합니다.</p><p class="smallprint">로컬 최대 256 KiB • RFC4180 스타일 따옴표 • UTF-8</p>
+<div class="check-grid">
+<section class="panel" aria-label="CSV 분석 입력"><h2>브라우저에서 검사</h2>
+<div class="field"><label for="csv-text">검사할 CSV 붙여넣기 (입력하면 선택 파일보다 우선)</label><textarea id="csv-text" autocomplete="off" spellcheck="false" placeholder="email,amount,date\ndemo@example.com,12.50,2026-10-20"></textarea></div>
+<div class="field"><label for="csv-file">또는 UTF-8 CSV 파일 선택 (브라우저 안에서만 처리)</label><input id="csv-file" type="file" accept=".csv,text/csv,text/plain"></div>
+<div class="field"><label for="required-columns">필수 열 이름 (선택, 쉼표로 구분)</label><input id="required-columns" type="text" autocomplete="off" spellcheck="false" maxlength="1024" placeholder="email,amount,date"></div>
+<div class="checks">
+<button id="analyze" class="primary" type="button">브라우저에서 무료 검사</button>
+<button id="demo" type="button">가상 예시 불러오기</button>
+<button id="clear" type="button">로컬에서 지우기</button>
+</div>
+</section>
+<section class="panel"><h2>내 CSV의 로컬 품질 결과</h2><p class="smallprint">여기에는 발견 코드·행·열 번호와 통계만 보입니다. 저장되는 JSON에 CSV 원문이 포함되지 않습니다.</p>
+<p id="status" role="status" aria-live="polite"></p><div id="findings"></div>
+<button id="download" type="button" class="btn secondary">원문 없는 결과 JSON 다운로드</button>
+<p class="smallprint">음수 같은 정상 값도 수식 의심 경고로 표시될 수 있습니다. 실제 가져오기 시스템의 정책과 대조하세요.</p>
+</section>
+</div>
+<section id="paid" class="panel"><span class="eyebrow">x402 • Base • USDC 0.005</span><h2>AI 에이전트용 정밀 검사가 필요하다면?</h2>
+<p>같은 소유자의 별도 VM5 서비스에서 32 KiB 이하의 허가된 민감하지 않은 CSV를 POST로 구조 분석합니다. 호출당 Base(eip155:8453) 정품 Circle USDC 0.005이며, 구매자가 x402로 따로 결제해야 합니다.</p>
+<p class="smallprint">개인정보, 고객 원장, 의료·금융 기록, 보안 키·비밀정보를 외부 유료 API로 보내지 마세요. 민감한 내용은 무료 로컬 검사만 이용하세요.</p>
+<label class="optin"><input type="checkbox" id="share-consent"><span>CSV의 소유자이거나 외부 분석을 허가받았습니다. 요청 JSON 복사 시 CSV 원문이 포함되고 다른 서비스에 붙여넣으면 공개될 수 있음을 이해합니다.</span></label>
+<div class="actions">
+<button type="button" id="copy-paid" class="btn primary">구매자 요청 JSON 복사 (업로드·결제 없음)</button>
+<a class="btn secondary" target="_blank" rel="noopener noreferrer" href="https://github.com/livastic-vm5-primary-20260911/x402-openapi-lint/blob/main/docs/CSV_REAL_DATA_BUYER_QUICKSTART_20261020.md">실제 x402 결제 절차 보기 ↗</a>
+<a class="btn secondary" target="_blank" rel="noopener noreferrer" href="https://vm5-openapi-x402.onrender.com/v1/csv-sample">무료 가상 서버 결과 보기 ↗</a>
+</div><p class="notice-panel">POST /v1/csv-preflight. HTTP 402는 결제 견적이며 판매 완료가 아닙니다. 실제 호출은 구매자의 x402 클라이언트와 지갑에서 별도로 승인해야 합니다. 이 페이지 자체는 서명·결제·업로드·수령을 하지 않습니다.</p>
+</section>
+<h2>무료와 유료의 차이</h2>
+<div class="compare"><article><h3>무료 • 브라우저 내부</h3><p>열 개수, 따옴표 구문, 중복 헤더·행, 빈 셀, 수식 의심값, 행 번호, 원문 없는 JSON 결과. 실제 가져오기 성공을 보증하는 검사가 아닙니다.</p></article><article><h3>유료 • 별도 x402 API</h3><p>구매자가 승인한 HTTP POST에 더 상세한 행·열 통계, 중복/빈 값/형식 의심값과 수식 경고를 JSON으로 반환합니다. 서버 처리이므로 비공개 CSV에는 적합하지 않습니다.</p></article></div>
+<p class="smallprint">AI 보조 개발 사실을 공개하는 단일 소유자의 도구입니다. VM2는 무료 웹사이트, VM5는 별도 유료 API 운영자입니다. 과거 외부 결제는 다른 가상 CSV GET 상품에 한정되며 구매자 입력 POST의 독립 실결제는 아직 0건입니다. 허위 리뷰나 수입은 주장하지 않습니다.</p>
+<p><a href="https://github.com/livastic-vm2-primary-20260911/workflow-risk-check" target="_blank" rel="noopener noreferrer">기존 오픈소스 검사기 ↗</a> · <a href="/ko/csv-preflight/">CSV API 가이드 ↗</a></p>
+</div></main><footer><div class="wrap footer-inner"><div><strong>Workflow Guard • 2026</strong><p>AI 보조 개발 사실을 공개하는 단일 소유자의 도구입니다. VM2는 무료 웹사이트, VM5는 별도 유료 API 운영자입니다. 과거 외부 결제는 다른 가상 CSV GET 상품에 한정되며 구매자 입력 POST의 독립 실결제는 아직 0건입니다. 허위 리뷰나 수입은 주장하지 않습니다.</p></div></div></footer>
+</body></html>

@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#153d31">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self'; connect-src 'none'; form-action 'none'; object-src 'none'; base-uri 'none'">
+<title>CSV Import Rescue — Free Local Check + Optional 0.005 USDC API</title>
+<meta name="description" content="Check CSV imports for mismatched columns, duplicate headers, blank cells and spreadsheet-formula warnings entirely in your browser; optional 0.005 Base USDC x402 API.">
+<link rel="canonical" href="https://livastic-vm2-primary-20260911.github.io/csv-checker/">
+<link rel="alternate" hreflang="en" href="https://livastic-vm2-primary-20260911.github.io/csv-checker/">
+<link rel="alternate" hreflang="ko" href="https://livastic-vm2-primary-20260911.github.io/ko/csv-checker/">
+<link rel="alternate" hreflang="x-default" href="https://livastic-vm2-primary-20260911.github.io/csv-checker/">
+<link rel="stylesheet" href="/assets/style.css">
+<style>
+.checker{padding:58px 0 76px}.checker h1{font-size:clamp(34px,5vw,58px);line-height:1.14;max-width:850px;margin:20px 0}
+.checker .lead{max-width:850px}.check-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(280px,.7fr);gap:24px;margin:32px 0}
+.panel{background:#fffefa;border:1px solid #c8d9cc;padding:25px;border-radius:14px;box-shadow:0 8px 22px #16422e0b}
+.panel h2{margin-top:0;font-size:24px}.field{margin:17px 0}.field label{display:block;font-weight:800;font-size:13px;margin-bottom:8px}
+.field input[type=file],.field input[type=text],.field textarea{display:block;width:100%;padding:11px;background:white;color:#17382b;border:1px solid #b9cabc;border-radius:6px;font:13px/1.55 ui-monospace,monospace}
+.field textarea{min-height:210px;resize:vertical}
+.field input:focus-visible,.field textarea:focus-visible,button:focus-visible{outline:3px solid #18745e;outline-offset:2px}
+button{cursor:pointer;font-family:inherit}.checks{display:flex;flex-wrap:wrap;gap:9px}
+.checks button{border:1px solid #a3bbae;padding:11px 13px;background:#f5faf4;color:#194332;border-radius:6px;font-weight:700}
+.checks button.primary{background:#153d31;color:#fff;border-color:#153d31}
+#status{padding:13px;border-radius:7px;background:#e4f1e7;color:#1e5137;min-height:50px}
+#findings .result-summary{font-weight:800}.findings-list{padding:0;list-style:none;max-height:320px;overflow:auto}
+.findings-list li{padding:7px 10px;border-bottom:1px solid #d8e4d8;font:12px/1.7 ui-monospace,monospace}
+.findings-list .problem{color:#a04127}.findings-list .caution{color:#805d22}
+.notice-panel{background:#ecf5ed;border:1px solid #d4e3d5;border-radius:9px;padding:18px;margin-top:18px;font-size:13px}
+.notice-panel p{margin:.3em 0 .7em}.optin{display:flex;gap:10px;align-items:flex-start;font-size:13px;line-height:1.65}
+.optin input{margin-top:4px;transform:scale(1.2);accent-color:#16694d}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:27px 0}
+.compare article{padding:22px;border:1px solid #d1dfd1;border-radius:9px;background:#fff}
+.compare h3{margin:0 0 8px}.compare p{font-size:13px;color:#536c5e}
+.smallprint{color:#61786b;font-size:12px;max-width:860px}
+@media(max-width:800px){.check-grid,.compare{grid-template-columns:1fr}.checker{padding:32px 0 60px}.panel{padding:17px}}
+</style>
+<script type="module" src="/assets/csv-checker-ui.mjs"></script>
+</head>
+<body>
+<header><div class="wrap header-inner"><a class="brand" href="/"><b>W</b> Workflow<span>Guard</span></a><nav><a href="/">Home</a><a href="/csv-preflight/">CSV API</a><a class="lang" href="/ko/csv-checker/">한국어</a></nav></div></header>
+<main class="checker"><div class="wrap">
+<p class="eyebrow">FREE • PRIVATE BY DEFAULT • NO ACCOUNT</p><h1>Find broken CSV rows before your import.</h1><p class="lead">Paste a CSV or choose a file. The validator runs inside this browser—no upload, no account, no wallet. Find structural errors before connecting a spreadsheet, CRM, AI agent or database.</p><p class="smallprint">≤ 256 KiB local • RFC4180-style quoting • UTF-8</p>
+<div class="check-grid">
+<section class="panel" aria-label="CSV check input"><h2>Run a real local check</h2>
+<div class="field"><label for="csv-text">Paste an authorized CSV (takes priority over selected file)</label><textarea id="csv-text" autocomplete="off" spellcheck="false" placeholder="email,amount,date\ndemo@example.com,12.50,2026-10-20"></textarea></div>
+<div class="field"><label for="csv-file">Or select a UTF-8 CSV file (processed locally)</label><input id="csv-file" type="file" accept=".csv,text/csv,text/plain"></div>
+<div class="field"><label for="required-columns">Required column headers (optional, comma separated)</label><input id="required-columns" type="text" autocomplete="off" spellcheck="false" maxlength="1024" placeholder="email,amount,date"></div>
+<div class="checks">
+<button id="analyze" class="primary" type="button">Analyze locally — $0</button>
+<button id="demo" type="button">Load fictional example</button>
+<button id="clear" type="button">Clear locally</button>
+</div>
+</section>
+<section class="panel"><h2>Your local quality report</h2><p class="smallprint">Only finding codes, row/column numbers and counts appear here. Raw data is never included in the exported report.</p>
+<p id="status" role="status" aria-live="polite"></p><div id="findings"></div>
+<button id="download" type="button" class="btn secondary">Download sanitized findings JSON</button>
+<p class="smallprint">Formula-like warnings may include legitimate negative numbers. Confirm against your import target.</p>
+</section>
+</div>
+<section id="paid" class="panel"><span class="eyebrow">x402 • Base • USDC 0.005</span><h2>Need an agent-ready paid check?</h2>
+<p>The same owner's separate VM5 service offers a paid RFC4180-style CSV report for 0.005 native Circle USDC on Base (eip155:8453) per independently authorized POST. It processes up to 32 KiB of non-sensitive buyer-supplied CSV. No subscription.</p>
+<p class="smallprint">Do not send customer PII, secrets, wallet keys, invoices, confidential CSV, medical or financial records to any external API. Use only free local checking for private content.</p>
+<label class="optin"><input type="checkbox" id="share-consent"><span>I own this CSV or have permission to process it externally. I understand that copying a payment payload includes my original CSV and may expose it if I paste it into another service.</span></label>
+<div class="actions">
+<button type="button" id="copy-paid" class="btn primary">Copy my JSON request (no upload or payment)</button>
+<a class="btn secondary" target="_blank" rel="noopener noreferrer" href="https://github.com/livastic-vm5-primary-20260911/x402-openapi-lint/blob/main/docs/CSV_REAL_DATA_BUYER_QUICKSTART_20261020.md">View buyer payment &amp; API instructions ↗</a>
+<a class="btn secondary" target="_blank" rel="noopener noreferrer" href="https://vm5-openapi-x402.onrender.com/v1/csv-sample">See free fictional server example ↗</a>
+</div><p class="notice-panel">POST /v1/csv-preflight. An unpaid HTTP 402 is a quote, NOT a sale. Your x402-capable client and your own wallet must authorize a separate payment. This web page never signs, pays, uploads or receives a payment.</p>
+</section>
+<h2>What is different?</h2>
+<div class="compare"><article><h3>FREE • Browser-local</h3><p>Structural parse, line numbers, duplicate headers/rows, empty cells, formula-like values, JSON findings export. Purely heuristic; not a guarantee of valid import.</p></article><article><h3>PAID • Independent x402 API</h3><p>HTTP POST returns deeper row/column counts, duplicate/empty/type mismatch checks and formula warnings in machine-readable JSON. Buyer-initiated paid server processing—not free, not a security audit.</p></article></div>
+<p class="smallprint">Built with disclosed AI assistance by one independent owner. VM2 provides the free site; VM5 is the separate same-owner paid API operator. Historic outside purchases were for a different fixed synthetic GET; there are zero verified independently paid orders for the buyer-input POST. No fake testimonials or payment claims.</p>
+<p><a href="https://github.com/livastic-vm2-primary-20260911/workflow-risk-check" target="_blank" rel="noopener noreferrer">Original free scanner source ↗</a> · <a href="/csv-preflight/">CSV API guide ↗</a></p>
+</div></main><footer><div class="wrap footer-inner"><div><strong>Workflow Guard • 2026</strong><p>Built with disclosed AI assistance by one independent owner. VM2 provides the free site; VM5 is the separate same-owner paid API operator. Historic outside purchases were for a different fixed synthetic GET; there are zero verified independently paid orders for the buyer-input POST. No fake testimonials or payment claims.</p></div></div></footer>
+</body></html>
