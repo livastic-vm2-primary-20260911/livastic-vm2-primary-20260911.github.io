@@ -126,3 +126,12 @@ test('Existing EN/KO homepage and paid API guides visibly link to the new workin
   assert(links.includes('https://livastic-vm2-primary-20260911.github.io/csv-checker/'));
   assert(links.includes('https://livastic-vm2-primary-20260911.github.io/ko/csv-checker/'));
 });
+
+test('Free checker source links point to the ACTUAL same-owner CSV analyzer, not unrelated YAML scanner',()=>{
+  const exact='https://github.com/livastic-vm2-primary-20260911/livastic-vm2-primary-20260911.github.io/blob/main/assets/csv-core.mjs';
+  for(const page of ['csv-checker/index.html','ko/csv-checker/index.html']){
+    const html=read(page);
+    assert(html.includes('href="'+exact+'"'));
+    assert(!html.includes('href="https://github.com/livastic-vm2-primary-20260911/workflow-risk-check"'));
+  }
+});
