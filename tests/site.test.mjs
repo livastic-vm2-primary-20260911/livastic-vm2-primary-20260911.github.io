@@ -160,3 +160,13 @@ test("CSV paid buyer conversion references only original VM5 and discloses new s
  assert.match(en,/HTTP 402 alone is not a sale/);
  assert.match(ko,/HTTP 402 자체는 결제가 아닙니다/);
 });
+
+test("Bilingual public route demonstration is honest and links only the original source",()=>{
+  const url="https://livastic-vm2-primary-20260911.github.io/vm2-route-backfill-demo-20261018/";
+  for(const html of [en,ko]){
+    assert.equal(html.split(url).length-1,1);
+    assert(html.includes("36/36"));
+    assert(html.includes("390 USDC"));
+    assert(!/390 USDC (?:earned|received|paid to us)|390 USDC(?:를)? (?:입금받|확정 수익)/i.test(html));
+  }
+});
