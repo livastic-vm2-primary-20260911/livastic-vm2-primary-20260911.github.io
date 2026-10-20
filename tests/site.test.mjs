@@ -124,7 +124,7 @@ test("All external new-tab links use noopener noreferrer",()=>{
 test("Root sitemap contains the two homepages and two new original bilingual guides without cross-project duplication",()=>{
  const sitemap=read("sitemap.xml");
  const urls=[...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(x=>x[1]);
- assert.deepEqual(urls,[domain+"/",domain+"/ko/",domain+"/guides/pull-request-target-november-2026/",domain+"/ko/guides/pull-request-target-2026/"]);
+ assert.deepEqual(urls,[domain+"/",domain+"/ko/",domain+"/guides/pull-request-target-november-2026/",domain+"/ko/guides/pull-request-target-2026/",domain+"/csv-preflight/",domain+"/ko/csv-preflight/"]);
  assert.equal(new Set(urls).size,urls.length);
  assert(read("robots.txt").includes("Sitemap: "+domain+"/sitemap.xml"));
 });

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#153d31">
+<title>CSV Import Validation: Free Preview + 0.005 USDC x402 Quality Report | Workflow Guard</title>
+<meta name="description" content="Validate a CSV before import with a clear free synthetic preview and a separate, buyer-provided CSV x402 data-quality preflight. 0.005 native Base USDC per paid API call; no hidden signup.">
+<link rel="canonical" href="https://livastic-vm2-primary-20260911.github.io/csv-preflight/">
+<link rel="alternate" hreflang="en" href="https://livastic-vm2-primary-20260911.github.io/csv-preflight/">
+<link rel="alternate" hreflang="ko" href="https://livastic-vm2-primary-20260911.github.io/ko/csv-preflight/">
+<link rel="alternate" hreflang="x-default" href="https://livastic-vm2-primary-20260911.github.io/csv-preflight/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="CSV Import Preflight — Demo First, Pay Only for an Authorized x402 Call">
+<meta property="og:description" content="Free synthetic preview, 0.005 USDC sample report, separate real buyer-input CSV check. No exaggerated buyer results.">
+<meta property="og:url" content="https://livastic-vm2-primary-20260911.github.io/csv-preflight/">
+<link rel="stylesheet" href="/assets/style.css">
+<style>
+.csv-guide{padding:48px 0 64px}.csv-guide h1{max-width:900px;line-height:1.12}
+.csv-guide .lead{max-width:820px}.csv-guide .mini{font-size:.95rem;line-height:1.7}
+.csv-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin:26px 0}
+.csv-steps article{padding:22px;border:1px solid rgba(80,130,108,.38);border-radius:12px;background:rgba(25,68,53,.08)}
+.csv-steps h2{font-size:1.25rem;margin:6px 0 8px}.csv-steps p{line-height:1.65}
+.csv-guide .plain-link{overflow-wrap:anywhere}
+@media(max-width:760px){.csv-steps{grid-template-columns:1fr}.csv-guide{padding-top:28px}}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","name":"CSV import validation before upload or import","url":"https://livastic-vm2-primary-20260911.github.io/csv-preflight/","inLanguage":"en","description":"Transparent comparison of a synthetic free CSV sample report and a separate paid preflight API for explicitly authorized buyer-supplied CSV input."}
+</script>
+</head>
+<body>
+<header><div class="wrap header-inner">
+<a class="brand" href="/" aria-label="Workflow Guard home"><b>W</b> Workflow<span>Guard</span></a>
+<nav aria-label="Primary navigation"><a href="/">Home</a><a href="/#services">Services</a><a href="/#contact">Contact</a><a class="lang" lang="ko" href="/ko/csv-preflight/">한국어 ↗</a></nav>
+</div></header>
+<main class="csv-guide"><div class="wrap">
+<p class="eyebrow">CSV quality • Independent, AI-assisted tooling • Transparent payment scope</p>
+<h1>Check CSV quality <em>before an import breaks.</em></h1>
+<p class="lead">Choose the correct API. A free example illustrates the report format; the paid GET returns a <strong>synthetic reference report</strong>, not a scan of your file. For actual non-sensitive CSV you own or are authorized to process, use the separate POST preflight.</p>
+<div class="actions">
+<a class="btn primary" href="https://vm5-openapi-x402.onrender.com/v1/csv-sample" target="_blank" rel="noopener noreferrer">View free report example ↗</a>
+<a class="btn secondary" href="https://github.com/livastic-vm5-primary-20260911/x402-openapi-lint/blob/main/docs/CSV_REAL_DATA_BUYER_QUICKSTART_20261020.md" target="_blank" rel="noopener noreferrer">Check your own CSV: buyer instructions ↗</a>
+</div>
+<section aria-label="Choose the correct service" class="csv-steps" id="options">
+<article><span class="eyebrow">01 / FREE</span><h2>Understand the format</h2><p>View a wholly fictional CSV-data quality report. Public GET returns a free example, not an audit of an uploaded CSV.</p><p><strong>$0 to preview.</strong></p><a class="plain-link" href="https://vm5-openapi-x402.onrender.com/v1/csv-sample" target="_blank" rel="noopener noreferrer">Open the sample report ↗</a></article>
+<article><span class="eyebrow">02 / 0.005 USDC</span><h2>Buy a reference report</h2><p>The existing paid <code>GET /v1/csv-report</code> delivers its predefined example only. An unsigned request may return HTTP 402 with payment instructions; <strong>402 is not payment</strong>.</p><p><strong>0.005 native Circle USDC on Base per authorized call.</strong></p><a class="plain-link" href="https://vm5-openapi-x402.onrender.com/v1/csv-report" target="_blank" rel="noopener noreferrer">Inspect the exact x402 paid GET quote ↗</a></article>
+<article><span class="eyebrow">03 / 0.005 USDC</span><h2>Check your own CSV</h2><p>For an actual permitted, non-sensitive CSV, use <code>POST /v1/csv-preflight</code> with a valid JSON body and an x402-capable client. A plain GET or invalid request is <strong>not</strong> an order.</p><p><strong>0.005 native Circle USDC per separately authorized successful call.</strong></p><a class="plain-link" href="https://github.com/livastic-vm5-primary-20260911/x402-openapi-lint/blob/main/docs/CSV_REAL_DATA_BUYER_QUICKSTART_20261020.md" target="_blank" rel="noopener noreferrer">See input examples and payment steps ↗</a></article>
+</section>
+<section aria-label="Honest limitations">
+<h2>What the result does—and does not—prove</h2>
+<p class="mini">These are small mechanical structure and quality preflights, not certification of database readiness, semantic correctness, safe production import, or compliance. Do not submit payment keys, personal information, private customer records, wallet recovery phrases or secrets. A hosted API processes the data you intentionally send; use local-first tools if your CSV is confidential. Network and wallet fees, if any, are the buyer's responsibility.</p>
+<p class="mini">The x402 software merchant is the original same-beneficial-owner <strong>VM5 Developer Data Preflight</strong> service. Workflow Guard here is a separate VM2 documentation and sales-information page, not a second legal seller or a new client. An independent automated verifier previously paid for and received the sample GET; <strong>there is no verified independent paid purchase of the buyer-input POST</strong>. No subscription, live customer count, security audit or guaranteed payout is claimed.</p>
+<p class="mini">Payment method: native Circle USDC on Base chain <code>eip155:8453</code>. The buyer chooses whether to authorize any transaction through their compatible x402 client. Viewing this page, opening a free demo, encountering HTTP 402, or submitting an inquiry does not transfer money.</p>
+</section>
+<p><a href="/#contact">Request a separate fixed-scope developer review ↗</a> · <a href="/ko/csv-preflight/" lang="ko">한국어 안내 ↗</a></p>
+</div></main>
+<footer><div class="wrap footer-inner"><strong>Workflow Guard / 2026</strong><p>One beneficial owner, factual AI-assisted disclosure, original documented software services. No buyer identity, payment secret, or false review collected here.</p></div></footer>
+</body></html>
