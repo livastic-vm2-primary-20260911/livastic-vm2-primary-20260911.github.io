@@ -155,3 +155,17 @@ test('the local CSV route keeps free checks separate from optional pinned wallet
   assert(!/eth_sendTransaction|eth_sendRawTransaction|wallet_sendCalls/.test(signer));
   assert(!/localStorage|sessionStorage|document\.cookie/.test(paid+signer));
 });
+
+test('wallet price quote uses only public synthetic CSV and links full original VM5 buyer page',()=>{
+  const signer=read('assets/x402-wallet-pay.mjs');
+  const ui=read('assets/csv-wallet-ui.mjs');
+  assert(signer.includes('QUOTE_SAMPLE'));
+  assert(signer.includes('quoteRequest'));
+  assert(ui.includes('FICTIONAL'));
+  assert(ui.includes('AFTER'));
+  const alt='https://livastic-vm5-primary-20260911.github.io/base-usdc-csv-checkout/';
+  for(const html of [read('csv-checker/index.html'),read('ko/csv-checker/index.html')]){
+    assert(html.includes('href="'+alt+'"'));
+    assert(html.includes('0.005'));
+  }
+});

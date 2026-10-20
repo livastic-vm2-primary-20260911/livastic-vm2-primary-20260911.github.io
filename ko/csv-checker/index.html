@@ -69,7 +69,8 @@ button{cursor:pointer;font-family:inherit}.checks{display:flex;flex-wrap:wrap;ga
 <button type="button" id="copy-paid" class="btn secondary">구매자 요청 JSON 복사 (업로드·결제 없음)</button>
 <a class="btn secondary" target="_blank" rel="noopener noreferrer" href="https://github.com/livastic-vm5-primary-20260911/x402-openapi-lint/blob/main/docs/CSV_REAL_DATA_BUYER_QUICKSTART_20261020.md">실제 x402 결제 절차 보기 ↗</a>
 <a class="btn secondary" target="_blank" rel="noopener noreferrer" href="https://vm5-openapi-x402.onrender.com/v1/csv-sample">무료 가상 서버 결과 보기 ↗</a>
-</div><p id="wallet-status" class="notice-panel" role="status" aria-live="polite"></p><div id="wallet-result" aria-live="polite"></div><p class="notice-panel">POST /v1/csv-preflight. HTTP 402는 판매가 아닌 결제 견적입니다. 무료 검사는 절대로 업로드하지 않습니다. 두 동의란을 선택하고 지갑 결제를 직접 눌렀을 때에만 기존 VM5 API에 CSV를 전송하고 고객 자신의 지갑에 0.005 USDC EIP-3009 서명·정산을 한 번 요청합니다. 개인키를 수집하지 않으며 자동 결제·가입·재시도는 없습니다. 정산이 불확실하면 재서명하지 말고 지갑을 확인하세요. 실제 정산금은 VM2 웹사이트가 아닌 VM5 운영자가 받습니다.</p>
+<a class="btn secondary" target="_blank" rel="noopener noreferrer" href="https://livastic-vm5-primary-20260911.github.io/base-usdc-csv-checkout/">동일 소유자 VM5의 별도 정식 지갑 결제 페이지 ↗</a>
+</div><p id="wallet-status" class="notice-panel" role="status" aria-live="polite"></p><div id="wallet-result" aria-live="polite"></div><p class="notice-panel">POST /v1/csv-preflight. HTTP 402는 판매가 아닌 결제 견적입니다. 무료 검사는 절대로 업로드하지 않습니다. 두 동의란과 결제 클릭 후 가상 CSV로 견적을 받고 구매자 지갑에 0.005 USDC EIP-3009 서명을 요청합니다. 실제 CSV는 서명 완료 후에만 VM5에 한 번 전송합니다. 개인키를 수집하지 않으며 자동 결제·가입·재시도는 없습니다. 정산이 불확실하면 재서명하지 말고 지갑을 확인하세요. 실제 정산금은 VM2 웹사이트가 아닌 VM5 운영자가 받습니다.</p>
 </section>
 <h2>무료와 유료의 차이</h2>
 <div class="compare"><article><h3>무료 • 브라우저 내부</h3><p>열 개수, 따옴표 구문, 중복 헤더·행, 빈 셀, 수식 의심값, 행 번호, 원문 없는 JSON 결과. 실제 가져오기 성공을 보증하는 검사가 아닙니다.</p></article><article><h3>유료 • 별도 x402 API</h3><p>구매자가 승인한 HTTP POST에 더 상세한 행·열 통계, 중복/빈 값/형식 의심값과 수식 경고를 JSON으로 반환합니다. 서버 처리이므로 비공개 CSV에는 적합하지 않습니다.</p></article></div>

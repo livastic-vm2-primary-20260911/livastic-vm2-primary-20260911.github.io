@@ -97,17 +97,17 @@ button.addEventListener('click',async()=>{
   try{
     const csv=await readBuyerCsv();
     const required=getRequired();
-    statusSet(t('Requesting the exact merchant quote. Your authorized CSV will reach the separate VM5 server once, but no payment signature yet.',
-      '기존 VM5 서버에 허가받은 CSV를 보내 정확한 견적을 받습니다. 아직 결제 서명은 없습니다.'));
+    statusSet(t('Requesting the exact quote with FICTIONAL CSV only. Your real CSV stays local until after the wallet signature.',
+      '공개 가상 CSV만으로 결제 견적을 확인합니다. 실제 CSV는 구매자의 지갑 서명 전까지 브라우저에만 남습니다.'));
     const result=await payCsvOnce({
       csvText:csv,expectedColumns:required,provider:window.ethereum,
       fetchFn:(url,options)=>fetch(url,{...options,mode:'cors',credentials:'omit',cache:'no-store'}),
       cryptoSource:crypto,nowSeconds:()=>Math.floor(Date.now()/1000),
       confirmPayment:async details=>window.confirm(t(
         'Authorize a ONE-TIME 0.005 USDC transfer on Base Mainnet (8453) to existing VM5 merchant '+SELLER+
-        '?\n\nYour CSV was already sent to '+PAY_URL+' for an unpaid quote. Wallet signature CAN move real USDC. Decline to pay nothing. Never approve a different amount, chain, or recipient.',
+        '?\n\nOnly a FICTIONAL sample CSV was sent to '+PAY_URL+' for the unpaid quote. Your REAL CSV will be sent only AFTER you sign. The signature CAN move real USDC. Check merchant, chain and amount carefully.',
         '실제 자금 이동을 승인하시겠습니까?\n금액: 0.005 USDC (단 1회)\n체인: Base 8453\n판매자: '+SELLER+
-        '\n\nCSV는 견적 요청으로 VM5에 전송됐습니다. 지갑 서명은 실제 USDC를 이동시킬 수 있습니다. 동의하지 않으면 취소하세요.'
+        '\n\n견적에는 가상 CSV만 사용했습니다. 실제 CSV는 구매자 지갑 서명 뒤에만 VM5에 전송됩니다. 지갑 서명은 실제 USDC를 이동시킬 수 있으니 확인하세요.'
       )),
       onSignStarted:()=>{signStarted=true;statusSet(t(
         'Wallet signature requested. If final status is uncertain, DO NOT sign again.',

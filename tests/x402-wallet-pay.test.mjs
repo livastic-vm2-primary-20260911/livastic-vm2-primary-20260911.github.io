@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {
-  PAY_URL,CAIP_CHAIN,USDC,SELLER,PRICE_ATOMIC,CheckoutError,
+  PAY_URL,CAIP_CHAIN,USDC,SELLER,PRICE_ATOMIC,QUOTE_SAMPLE,CheckoutError,
   decodeBase64Utf8,encodeBase64Utf8,validateQuote,
   createAuthorization,randomNonce,safePaidSummary,payCsvOnce
 } from '../assets/x402-wallet-pay.mjs';
@@ -110,6 +110,11 @@ test('single mock buyer payment: 402 quote, own wallet signature, ONE retry and 
   assert.equal(wire.length,2);
   assert.equal(wire[0].url,PAY_URL);assert.equal(wire[1].url,PAY_URL);
   assert(!wire[0].opts.headers['PAYMENT-SIGNATURE']);
+  assert.deepEqual(JSON.parse(wire[0].opts.body),{
+    csvText:QUOTE_SAMPLE,expectedColumns:['id','amount']
+  });
+  assert(!wire[0].opts.body.includes('Alice'));
+  assert(wire[1].opts.body.includes('Alice'));
   const signed=decodeBase64Utf8(wire[1].opts.headers['PAYMENT-SIGNATURE']);
   assert.deepEqual(signed.resource,resource);
   assert.deepEqual(signed.accepted,offer);
@@ -129,6 +134,8 @@ test('buyer refuses: no wallet connect or signature and no paid retry',async()=>
     requests.push(args);return firstResponse();},async()=>false));
   assert.equal(result.status,'cancelled_no_signature');
   assert.equal(requests.length,1);
+  assert.equal(JSON.parse(requests[0][1].body).csvText,QUOTE_SAMPLE);
+  assert(!requests[0][1].body.includes('Alice'));
   assert.deepEqual(calls.map(c=>c.method),['eth_chainId']);
 });
 test('wrong network never sends CSV or signs anything',async()=>{

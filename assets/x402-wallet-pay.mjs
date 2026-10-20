@@ -11,6 +11,8 @@ export const CAIP_CHAIN='eip155:8453';
 export const USDC='0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913';
 export const SELLER='0x6b01efA0705E91a7aca54271510bf9e594717f34';
 export const PRICE_ATOMIC='5000'; // exactly 0.005000 USDC; hard cap.
+export const QUOTE_SAMPLE='id,amount\nfictional-demo,1\n'; // quote ONLY, never buyer data
+
 const address=/^0x[0-9a-fA-F]{40}$/;
 const sig=/^0x[0-9a-fA-F]{130}$/;
 const hexNonce=/^0x[0-9a-fA-F]{64}$/;
@@ -128,13 +130,18 @@ export async function payCsvOnce({csvText,expectedColumns=[],provider,
   const chain=await provider.request({method:'eth_chainId'});
   if(typeof chain!=='string'||Number.parseInt(chain,16)!==CHAIN_ID)refuse('WALLET_MUST_BE_ON_BASE');
   const options={method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body};
+  // The first unpaid 402 probe uses ONLY nonsecret, fixed synthetic bytes.
+  // The actual buyer CSV is sent exactly once: AFTER the buyer signs.
+  const quoteRequest={...options,body:JSON.stringify({
+    csvText:QUOTE_SAMPLE,expectedColumns:['id','amount']
+  })};
   let response;
-  try{response=await fetchFn(PAY_URL,options);}catch{refuse('API_UNREACHABLE_NO_SIGNATURE');}
+  try{response=await fetchFn(PAY_URL,quoteRequest);}catch{refuse('API_UNREACHABLE_NO_SIGNATURE');}
   if(response.status!==402)refuse('EXPECTED_402_NO_SIGNATURE');
   const offerResponse=decodeBase64Utf8(response.headers.get('payment-required'));
   const offer=validateQuote(offerResponse);
-  // Browser has already sent the non-sensitive CSV to existing VM5 once to get
-  // this live quote. No signature, payment or wallet transfer has occurred yet.
+  // Only the fixed, PUBLIC synthetic sample was sent to obtain the quote.
+  // Real customer CSV remains in their own browser until after signature.
   const approved=await confirmPayment({
     priceUSDC:'0.005',network:CAIP_CHAIN,recipient:SELLER,
     externalApi:PAY_URL,quote:offer
