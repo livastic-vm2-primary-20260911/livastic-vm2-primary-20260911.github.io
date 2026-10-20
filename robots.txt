@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
 Sitemap: https://livastic-vm2-primary-20260911.github.io/sitemap.xml
+Sitemap: https://livastic-vm2-primary-20260911.github.io/sitemap-index.xml
