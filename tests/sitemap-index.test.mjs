@@ -6,7 +6,7 @@ const site="https://livastic-vm2-primary-20260911.github.io";
 const xml=read("sitemap-index.xml");
 const robots=read("robots.txt");
 
-test("root sitemap index links the root and three genuine owner-hosted project sitemaps",()=>{
+test("root sitemap index links the root and four genuine owner-hosted project sitemaps",()=>{
  assert.match(xml,/^<\?xml version="1\.0" encoding="UTF-8"\?>/);
  assert.match(xml,/<sitemapindex xmlns="http:\/\/www\.sitemaps\.org\/schemas\/sitemap\/0\.9">/);
  const rows=[...xml.matchAll(/<sitemap><loc>(https:\/\/[^<]+)<\/loc><lastmod>([^<]+)<\/lastmod><\/sitemap>/g)];
@@ -15,9 +15,10 @@ test("root sitemap index links the root and three genuine owner-hosted project s
   site+"/sitemap.xml",
   site+"/vault-exit-reality/sitemap.xml",
   site+"/workflow-risk-usdc-studio/sitemap.xml",
-  site+"/signscope-offline-permit-checker/sitemap.xml"
+  site+"/signscope-offline-permit-checker/sitemap.xml",
+  site+"/x402-manifest-import-preflight/sitemap.xml"
  ]);
- assert.equal(new Set(urls).size,4);
+ assert.equal(new Set(urls).size,5);
  assert(rows.every(x=>/^\d{4}-\d\d-\d\d$/.test(x[2])));
  assert(xml.trim().endsWith("</sitemapindex>"));
 });
