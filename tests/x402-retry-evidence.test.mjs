@@ -82,6 +82,9 @@ test("user-facing tool is entirely client-side, no wallet, no upload, no fake pa
  assert.match(site,/29 native Circle Base USDC/);
  assert.match(site,/quote, not an instant checkout/);
  assert.match(site,/mailto:onecursor1@gmail.com/);
+ assert.match(site,/clawlancer\.ai\/marketplace\/84efd440-a7cd-4932-8d5d-415e7f05d33b/);
+ assert.match(site,/fixed 29 native Circle Base USDC/);
+ assert.match(site,/no verified previous customers/);
  assert(!/https?:\/\/(?:js\.stripe\.com|cdn\.)/i.test(site));
  assert(!/fetch\(|XMLHttpRequest|sendBeacon|localStorage|connectWallet/.test(app));
  assert.match(app,/textContent=/);
