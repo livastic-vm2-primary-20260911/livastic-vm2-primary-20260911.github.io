@@ -12,7 +12,9 @@
 <meta property="og:url" content="https://livastic-vm2-primary-20260911.github.io/x402-trace/">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; object-src 'none'; form-action 'none'; base-uri 'none'; frame-ancestors 'none'">
 <link rel="stylesheet" href="./styles.css">
+<link rel="stylesheet" href="./plan-seam.css">
 <script type="module" src="./app.mjs"></script>
+<script type="module" src="./plan-ui.mjs"></script>
 </head>
 <body>
 <header class="bar"><div class="wrap top"><a class="wordmark" href="/" aria-label="Workflow Guard home">Workflow<span>Guard</span></a><span class="status"><span aria-hidden="true">●</span> OFFLINE-ONLY / NO WALLET</span></div></header>
@@ -36,6 +38,19 @@
 <div id="reports"></div>
 <p class="note">Every result uses only supplied labels. <strong>A 200 response, a successful verification, or a claimed settlement is not independently verified payment or delivery.</strong> Review provider receipts, original buyer authorization, and unique finalized transaction evidence separately. Never automatically re-sign because this checker flags an error.</p>
 </section>
+</section>
+<section class="plan-section wrap" id="plan-verify" aria-labelledby="plan-title">
+<div class="eyebrow">BEFORE YOU SIGN · MULTIPLE PRICES / SUBSCRIPTION PLANS</div>
+<h2 id="plan-title">Do the plan quote and verifier agree?</h2>
+<p>One real independent x402 developer reported a production-blocking mismatch: a <strong>9.000000 USDC</strong> prepaid access quote was verified against the application's unrelated <strong>0.005000 USDC</strong> per-call default, even though the 402 quote test was green. <a href="https://dev.to/mrpkk/the-test-suite-was-green-while-the-payment-path-was-broken-1e71" target="_blank" rel="noopener noreferrer">Read that developer's firsthand case ↗</a>. Our sample models the arithmetic only and is neither their product nor a live middleware test.</p>
+<p><strong>This tool does not connect to a payment service.</strong> Manually type invented plan labels and the amounts that a server UI, 402 challenge, and verification seam would use, all as six-decimal USDC atomic unit strings. A mismatch warns that the value passed to the verifier may not match what the buyer was asked to sign.</p>
+<div class="plan-examples"><button type="button" data-plan-example="brokenSubscription">Try broken 9 USDC vs 0.005 case</button><button type="button" data-plan-example="correctedPrices">Try matching prices</button></div>
+<label for="plan-input">Fictional plan price matrix (not real signed requests)</label>
+<textarea id="plan-input" rows="11" spellcheck="false" maxlength="16384" aria-describedby="plan-format"></textarea>
+<p id="plan-format">Only synthetic short plan names and decimal atomic USDC amounts (e.g. <code>9000000</code> means 9.000000 USDC). No wallet address, tx hash, customer data, or actual request headers.</p>
+<div class="plan-controls"><button id="plan-inspect" type="button">Compare the price seam →</button><button id="plan-download" type="button" disabled>Export fictional findings JSON ↓</button><button id="plan-clear" type="button">Clear</button></div>
+<p id="plan-error" class="plan-error" role="alert" hidden></p>
+<section id="plan-results" aria-label="Pre-sign plan amount consistency results" aria-live="polite" hidden><h3>Pre-sign findings <small id="plan-summary"></small></h3><div id="plan-findings"></div><p><strong>This is not actual settlement evidence.</strong> To verify a merchant integration, test your own server middleware's amount-argument seam using a fake verifier spy in your own authorized CI; never spend crypto to make a test green.</p></section>
 </section>
 <section class="reader-feedback wrap" id="feedback"><span class="eyebrow">READERS / REAL PROBLEM SIGNALS</span><h2>Does the free result match your experience?</h2><p>If a warning was wrong or a case is missing, <a href="https://github.com/livastic-vm2-primary-20260911/livastic-vm2-primary-20260911.github.io/issues/new?template=x402-retry-feedback.yml" target="_blank" rel="noopener noreferrer">send a public, non-sensitive developer feedback issue ↗</a>. This is voluntary and requires a GitHub account. The optional form asks what you actually tried and whether a separate 29 USDC human review could matter; it does not purchase anything. Never submit wallets, signed payloads, client logs or secrets. Independent human feedback received so far: <strong>none verified</strong>.</p></section>
 <section class="block wrap">

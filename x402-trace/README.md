@@ -21,3 +21,11 @@ https://livastic-vm2-primary-20260911.github.io/x402-trace/
 **Testing**: from parent first-party homepage Git checkout run npm test. No npm dependencies for this feature. CI tests verify edge states, privacy and publication wiring. The seller's original VM5 Base USDC address is not requested here and there is no automatic payment. Historical one-owner Base8453 gross 1.020000 USDC, separately 5 XNO previous award, VM2 sponsor nominal 1.220000 approved but final receipt unverified are NOT sales of this new product.
 
 Original copyright/licensing: HTML/CSS/ESM original independently developed AI-assisted One Cursor material. Existing root repo licensing applies; code may be used for educational examples with attribution.
+
+## October 21 improvement: plan-price verification seam (no live payments)
+
+A separate independent developer's October 20 article, https://dev.to/mrpkk/the-test-suite-was-green-while-the-payment-path-was-broken-1e71 , describes a 9.000000 USDC subscription price being validated against an unrelated 0.005000 USDC per-call requirement, despite green tests. That author had already fixed their own code. Our tool is NOT a contribution to their service, a verified retest, or a customer engagement.
+
+Additional browser-local plan-seam.mjs models explicitly fictional, short-labeled per-call/standard/regional route display amount, advertised HTTP 402 amount, and expected verification-argument amount. It flags display-to-challenge, challenge-to-verifier disagreements and a suspicious shared default across divergent price tiers. Users can export JSON of their completely fictional findings. It CANNOT read or verify actual middleware or safely accept real signed x402 headers, owner wallet records or customers. No code is executed or uploaded from the pasted matrix.
+
+Practical authorized CI follow-up is a fake-facilitator/spy seam test INSIDE the seller's own app, asserting that amount_atoms passed to the verifier equals the quoted plan amount, that wrong amounts never trigger settlement, and that no prepaid entitlement is granted unless payment is separately proved. A green hypothetical matrix is NOT that middleware test, and an external paid review remains separately negotiated under the existing 29USDC SKU. This repo's npm test and offline Chromium tests cover the synthetic classifier and UI only.
