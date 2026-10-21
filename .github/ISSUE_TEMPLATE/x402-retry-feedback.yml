@@ -1,0 +1,66 @@
+name: "x402 Retry Evidence — public developer feedback"
+description: "Report one concrete issue with the free offline synthetic payment/retry/delivery checker. Do NOT share secrets or real payment headers."
+title: "[x402 trace feedback] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for inspecting the free offline x402 Retry Evidence checker.
+        This issue is PUBLIC and visible to everyone. Do not include credentials,
+        signed x402 payloads, private transaction hashes, wallet addresses,
+        customer information, personal email addresses or production logs.
+        Use fictional event labels only. No real payments or wallet activity are needed.
+        The tool cannot verify on-chain settlement or service delivery.
+  - type: dropdown
+    id: use
+    attributes:
+      label: What did you actually try?
+      options:
+        - Fictional double-settlement example
+        - Fictional settled-without-delivery example
+        - Fictional consistent payment and delivery example
+        - My own invented non-sensitive event sequence
+        - I have not used the free tool yet
+    validations:
+      required: true
+  - type: textarea
+    id: observed
+    attributes:
+      label: What was confusing, broken or missing?
+      description: "Describe the observed UI finding or expected explanation. Do not post any personal or customer data."
+      placeholder: "A fictional RETRY after a SETTLE produced a warning, but the wording did not explain how to recover an existing receipt."
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Optional fully fictional reproduction
+      description: "Use short fake labels such as jobA/payA. No signed headers, real wallet addresses, private merchant URLs or identifying logs."
+      placeholder: "QUOTE jobA 5000 / SETTLE payA 5000 / RETRY payA; no delivery label"
+    validations:
+      required: false
+  - type: textarea
+    id: outcome
+    attributes:
+      label: What output would have made this more useful?
+      placeholder: "I would want the report to distinguish response loss from a confirmed missing delivery."
+    validations:
+      required: true
+  - type: dropdown
+    id: paid
+    attributes:
+      label: Could a separately agreed human-reviewed public-route QA be worth paying for? (Nonbinding)
+      options:
+        - No, the free local checker is sufficient
+        - Maybe, after seeing more real reproducible evidence
+        - A 29 native Base Circle USDC public-route review could be relevant to my work
+        - I cannot estimate / prefer not to say
+    validations:
+      required: false
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Public data confirmation
+      options:
+        - label: "I used only fictional or intentionally public and non-sensitive information; this issue contains no wallet secrets, signatures, customer data or private logs."
+          required: true

@@ -16,6 +16,8 @@ https://livastic-vm2-primary-20260911.github.io/x402-trace/
 
 **Relationship to existing same-owner products:** VM1 already supplies the x402 quote/CORS/payment-header **byte-size** checker; VM3 already validates 402 **contract quotes**; VM5 already operates the canonical external Base native Circle USDC merchant and separate invoice reconciliation. This product instead examines **logical retried payment and service-delivery timeline invariants** without any network. VM1/VM2/VM3/VM5 are ONE beneficial human economic owner, not four different buyers.
 
+**Actual external-user feedback, opt-in only:** Public issue template https://github.com/livastic-vm2-primary-20260911/livastic-vm2-primary-20260911.github.io/issues/new?template=x402-retry-feedback.yml asks what was actually tried, one fictional reproduction, what outcome would help, and optionally willingness to pay for a separate 29-USDC review. GitHub login is needed; users are warned not to post any wallet or customer records. This is user research only; no real third-party response or paid order is verified yet.
+
 **Testing**: from parent first-party homepage Git checkout run npm test. No npm dependencies for this feature. CI tests verify edge states, privacy and publication wiring. The seller's original VM5 Base USDC address is not requested here and there is no automatic payment. Historical one-owner Base8453 gross 1.020000 USDC, separately 5 XNO previous award, VM2 sponsor nominal 1.220000 approved but final receipt unverified are NOT sales of this new product.
 
 Original copyright/licensing: HTML/CSS/ESM original independently developed AI-assisted One Cursor material. Existing root repo licensing applies; code may be used for educational examples with attribution.
