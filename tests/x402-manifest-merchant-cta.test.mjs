@@ -9,7 +9,7 @@ test('public x402 merchant value path has a free check and a distinct optional r
   assert.match(html,/href="https:\/\/clawlancer\.ai\/marketplace\/3afdccb7-ecd3-471b-b3b0-8983543cfce7"/);
   assert.match(html,/Optional fixed 19 native Circle USDC/);
   assert.match(html,/payment audit or proof of settlement/);
-  const block=html.slice(html.indexOf('id="x402-merchant"'),html.indexOf('id="local-csv"'));
+  const block=html.slice(html.indexOf('id="x402-merchant"'),html.indexOf('</p>',html.indexOf('id="x402-merchant"')));
   assert.equal((block.match(/rel="noopener noreferrer"/g)||[]).length,3);
   assert.doesNotMatch(block,/<script\b|private key|secret phrase/i);
 });

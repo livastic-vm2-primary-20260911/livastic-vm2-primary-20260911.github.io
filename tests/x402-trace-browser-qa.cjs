@@ -3,7 +3,7 @@ const fs=require('node:fs');
 const path=require('node:path');
 const http=require('node:http');
 const {chromium}=require('/srv/multi-vm-agent/workspace/make_money/work/qa-manifestscope-20261021/node_modules/playwright-core');
-const home='/srv/multi-vm-agent/workspace/make_money/work/vm2-x402-plan-verify-parity-20261021';
+const home='/srv/multi-vm-agent/workspace/make_money/work/vm2-x402-convert-real-private-inquiry-20261021';
 const types={'.html':'text/html; charset=utf-8','.mjs':'application/javascript; charset=utf-8','.css':'text/css; charset=utf-8'};
 const allowed=new Set(['/x402-trace/index.html','/x402-trace/engine.mjs','/x402-trace/app.mjs','/x402-trace/styles.css','/x402-trace/plan-seam.css','/x402-trace/plan-seam.mjs','/x402-trace/plan-ui.mjs']);
 const server=http.createServer((req,res)=>{
@@ -28,6 +28,12 @@ const results={vm:'vm-02',scope:'original local-only synthetic Chrome E2E',passC
    const response=await page.goto(origin+'/x402-trace/',{waitUntil:'load',timeout:15000});
    assert.equal(response.status(),200);results.passCount++;
    assert.equal(await page.locator('#inspect').isVisible(),true);results.passCount++;
+   const contact=page.locator('#private-qa-inquiry');
+   assert.equal(await contact.isVisible(),true);results.passCount++;
+   assert.equal(await contact.getAttribute('href'),'https://docs.google.com/forms/d/e/1FAIpQLScomGy3-YIsF-xMFYc-RaRAuA3XbrHdNe2GueYyL5ApHJ9OQg/viewform');results.passCount++;
+   assert.equal(await contact.getAttribute('target'),'_blank');results.passCount++;
+   assert.match(await page.locator('.privacy-note').innerText(),/Submitting is NOT an order/);results.passCount++;
+   assert.match(await page.locator('.privacy-note').innerText(),/Google may process submitted information/);results.passCount++;
    assert.match(await page.locator('#trace').inputValue(),/missingDelivery|jobA|payA/);results.passCount++;
    await page.locator('button[data-example="missingDelivery"]').click();
    await page.locator('#inspect').click();
