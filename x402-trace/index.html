@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101e2b">
+<title>x402 Retry Evidence — local payment and delivery trace checks | Workflow Guard</title>
+<meta name="description" content="Free offline x402 settlement and delivery trace inspector. Catch duplicate claimed payments, missing deliveries, and unsafe retry sequences using fictional or redacted event labels. No wallet or upload.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://livastic-vm2-primary-20260911.github.io/x402-trace/">
+<meta property="og:type" content="website"><meta property="og:title" content="x402 Retry Evidence — no-wallet trace check">
+<meta property="og:description" content="Find inconsistencies in fictional payment retry, settlement and delivery sequences. Offline, no wallet, no signatures.">
+<meta property="og:url" content="https://livastic-vm2-primary-20260911.github.io/x402-trace/">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; object-src 'none'; form-action 'none'; base-uri 'none'; frame-ancestors 'none'">
+<link rel="stylesheet" href="./styles.css">
+<script type="module" src="./app.mjs"></script>
+</head>
+<body>
+<header class="bar"><div class="wrap top"><a class="wordmark" href="/" aria-label="Workflow Guard home">Workflow<span>Guard</span></a><span class="status"><span aria-hidden="true">●</span> OFFLINE-ONLY / NO WALLET</span></div></header>
+<main>
+<section class="hero wrap"><div class="eyebrow">X402 PAYMENT OPS · EVIDENCE BEFORE RE-TRY</div>
+<h1>A payment said <em>settled.</em><br>Was anything delivered?</h1>
+<p class="lead">Model a fictional x402 payment timeline before your agent risks repeating a charge. Flag claimed settlements with no delivery record, multiple payment labels for one order, price mismatches, and unsafe retry sequences. This is <strong>local educational triage</strong>, not an on-chain verifier.</p>
+<div class="features"><span>✓ No account or signup</span><span>✓ No wallet connection</span><span>✓ No API calls or uploads</span><span>✓ 32 synthetic events max</span></div>
+</section>
+<section class="work wrap" aria-labelledby="editor-title">
+<div class="sectiontop"><div><span class="eyebrow">01 / TRY ONE SCENARIO</span><h2 id="editor-title">Payment event timeline</h2></div><span class="cap">Runs on this device</span></div>
+<p class="note"><strong>Do not paste real provider logs, customer data, transaction signatures, API credentials or wallet addresses.</strong> Use invented labels such as <code>jobA</code> and <code>payA</code>, and hypothetical six-decimal USDC amounts. Paste nothing you lack permission to share—even though this page itself makes no outbound network requests.</p>
+<div class="samplebuttons" aria-label="Load a fictional example"><button type="button" data-example="missingDelivery">Settled, delivery missing</button><button type="button" data-example="doublePayment">Double-payment risk</button><button type="button" data-example="matchingClaims">Consistent synthetic trace</button></div>
+<label class="inputtitle" for="trace">Fictional scenario JSON (no real wallet data)</label>
+<textarea id="trace" rows="14" spellcheck="false" autocomplete="off" maxlength="32768" aria-describedby="trace-help"></textarea>
+<p id="trace-help" class="footnote">Accepted kinds: QUOTE, VERIFY, SETTLE, DELIVER, RETRY, REPLAY_REJECTED, PRICE_CHANGED, REJECT. All event labels must be short, invented identifiers. Event order is list order.</p>
+<div class="tools"><button type="button" id="inspect" class="primary">Analyze synthetic trace →</button><button type="button" id="download" disabled>Download findings JSON ↓</button><button type="button" id="clear">Clear</button></div>
+<p id="error" role="alert" hidden></p>
+<section id="results" hidden aria-label="Synthetic analysis output" aria-live="polite">
+<div class="resulthead"><h2>Findings <small id="summary"></small></h2><strong class="notproof">NOT PAYMENT PROOF</strong></div>
+<div id="reports"></div>
+<p class="note">Every result uses only supplied labels. <strong>A 200 response, a successful verification, or a claimed settlement is not independently verified payment or delivery.</strong> Review provider receipts, original buyer authorization, and unique finalized transaction evidence separately. Never automatically re-sign because this checker flags an error.</p>
+</section>
+</section>
+<section class="block wrap">
+<div class="eyebrow">02 / WHAT IT CANNOT DO</div>
+<div class="cards">
+<article><h3>Payment vs. service</h3><p>A claimed 402 → VERIFY → SETTLE → DELIVER sequence may look consistent while the service failed. This tool cannot authenticate provider events, network finality, job readiness, or refund/credit records.</p></article>
+<article><h3>Safer retry decisions</h3><p>When a response is lost, recover the original order receipt using the merchant's documented idempotency and support flow. Do not sign a second transfer until its necessity is independently proven.</p></article>
+<article><h3>Payment amounts</h3><p>Use synthetic six-decimal USDC atomic units. A mismatch might be a valid account credit rather than overcharging; the tool does not verify the chain, recipient, token contract or quote signature.</p></article>
+</div>
+</section>
+<section class="contact"><div class="wrap contactgrid"><div><span class="eyebrow">03 / OPTIONAL INDEPENDENT ENGINEERING</span><h2>Have a public x402 failure to reproduce?</h2><p>Request an individually agreed written QA scope, starting at <strong>29 native Circle Base USDC</strong> for one buyer-authorized, publicly shareable HTTP route and synthetic non-paying retry cases. Only if accepted: bounded reproduction, precise observed results and a proposed test matrix. This is a <strong>quote, not an instant checkout or safety audit.</strong></p>
+<p>No live payment, private logs, merchant authentication or automatic scanning without separately agreed authorization. AI-assisted single operator based in South Korea; acceptance criteria, payment recipient, timing and refund terms agreed in writing before work.</p>
+<a class="contactlink" href="mailto:onecursor1@gmail.com?subject=x402%20retry%20evidence%20QA%20scope&body=Public%20route%20(URL)%3A%0AExpected%20behavior%3A%0AFictional%20repro%3A%0ABudget%20and%20deliverable%3A">Request a non-secret QA scope by email →</a>
+</div><div class="contactside"><h3>Other free single-owner tools</h3><a href="https://livastic-vm1-primary.github.io/paperpilot-tools/x402-inspector.html" rel="noopener noreferrer">VM1 x402 quote / CORS / header budget ↗</a><a href="https://livastic-vm3-primary-tmp-260920.github.io/x402-contract-check/" rel="noopener noreferrer">VM3 x402 v1/v2 quote checks ↗</a><a href="/x402-manifest-import-preflight/">VM2 merchant x402.json preflight ↗</a><a href="/csv-checker/">VM2 private browser-only CSV QA ↗</a><p>One beneficial owner runs these tools. Links are alternatives, not independent customer endorsements.</p></div></div></section>
+</main><footer><div class="wrap"><span>Workflow Guard / 2026 · Independent AI-assisted engineering</span><span>No tracking · No payment signatures · No wallet upload · MIT demonstration logic</span></div></footer>
+</body></html>

@@ -24,6 +24,10 @@
 - [Distinct paid synthetic report GET — 0.005 USDC](https://vm5-openapi-x402.onrender.com/v1/csv-report). The original independent outside automated scout previously bought and received one such synthetic report; a later separate final 0.005 USDC transfer has no proven one-to-one HTTP delivery mapping. **Independent paid orders for buyer-input POST: zero confirmed as of 2026-10-20.**
 - No secret keys, personal data, private CSV, customer credentials or wallet recovery phrases should ever be supplied to an online evaluator. Payment quotes, clicks and HTTP 402 are **not** money received.
 
+## Free: x402 Retry Evidence (synthetic payment, settlement and delivery triage)
+
+- [x402 Retry Evidence — fully local fictional case classifier](https://livastic-vm2-primary-20260911.github.io/x402-trace/): detect contradictory claimed payment retries, missing delivery entries and possible repeat settlements. It never reads private data, contacts a facilitator or verifies chain events. Optional bounded manual public-route QA is **29 native Circle Base USDC quoted only after written buyer acceptance**, not an instant checkout or a past sale. No buyer yet.
+
 ## Inspect independent original source before purchase
 
 - [Free heuristic workflow risk checker](https://livastic-vm2-primary-20260911.github.io/workflow-risk-check/) and [its original public source](https://github.com/livastic-vm2-primary-20260911/workflow-risk-check).
