@@ -170,3 +170,18 @@ test("Bilingual public route demonstration is honest and links only the original
     assert(!/390 USDC (?:earned|received|paid to us)|390 USDC(?:를)? (?:입금받|확정 수익)/i.test(html));
   }
 });
+
+
+test("Public CI 25 Base USDC quote appears in both languages while preserving existing CSV first CTA",()=>{
+ const issue="https://github.com/livastic-vm2-primary-20260911/workflow-risk-check/issues/new?template=public-workflow-preflight-25-usdc.yml";
+ const mail="mailto:onecursor1@gmail.com?subject=Public%20GitHub%20Actions%20preflight%20-%2025%20Base%20USDC";
+ for(const html of [en,ko]){
+  assert.equal(html.split('id="buyer-ci-25"').length-1,1);
+  assert(html.includes(issue));
+  assert(html.includes(mail));
+  assert(html.indexOf('id="buyer-csv-first"')<html.indexOf('id="buyer-ci-25"'));
+  assert(html.includes('id="buyer-csv-route"'));
+ }
+ assert.match(en,/inquiry only, not an order or payment/);
+ assert.match(ko,/문의는 주문·결제가 아닙니다/);
+});
